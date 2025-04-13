@@ -1,5 +1,14 @@
 export const FILMS_COUNT = 20;
 
+export enum AppRoute {
+  Root = '/',
+  Login = '/login',
+  UserList = '/mylist',
+  Films = '/films',
+  Review = '/review',
+  Player = '/player',
+}
+
 export const FILMS = [
   {
     id: 1,
