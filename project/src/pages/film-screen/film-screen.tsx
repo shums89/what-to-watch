@@ -1,4 +1,9 @@
-const FilmCardScreen = (): JSX.Element => (
+import { Link } from 'react-router-dom';
+import Footer from '../../components/footer/footer';
+import HeaderUserBlock from '../../components/header-user-block/header-user-block';
+import Logo from '../../components/logo/logo';
+
+const FilmScreen = (): JSX.Element => (
   <>
     <section className="film-card film-card--full">
       <div className="film-card__hero">
@@ -9,24 +14,9 @@ const FilmCardScreen = (): JSX.Element => (
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <HeaderUserBlock />
         </header>
 
         <div className="film-card__wrap">
@@ -50,7 +40,7 @@ const FilmCardScreen = (): JSX.Element => (
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn film-card__button">Add review</a>
+              <Link to="review" className="btn film-card__button">Add review</Link>
             </div>
           </div>
         </div>
@@ -142,21 +132,9 @@ const FilmCardScreen = (): JSX.Element => (
         </div>
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </>
 );
 
-export default FilmCardScreen;
+export default FilmScreen;

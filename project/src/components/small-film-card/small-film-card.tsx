@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type SmallFilmCardProps = {
   name: string;
   posterImage: string;
@@ -14,9 +16,9 @@ const SmallFilmCard = ({ name, posterImage }: SmallFilmCardProps): JSX.Element =
       />
     </div>
     <h3 className="small-film-card__title">
-      <a className="small-film-card__link" href="film-page.html">
+      <Link to="/films/1" className="small-film-card__link">
         {name}
-      </a>
+      </Link>
     </h3>
   </article>
 );
