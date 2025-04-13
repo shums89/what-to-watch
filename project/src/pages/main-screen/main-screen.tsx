@@ -1,6 +1,11 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { Film } from '../../types/film';
 
-const MainScreen = (): JSX.Element => (
+type MainScreenProps = {
+  films: Film[];
+};
+
+const MainScreen = ({ films }: MainScreenProps): JSX.Element => (
   <>
     <section className="film-card">
       <div className="film-card__bg">
@@ -100,10 +105,7 @@ const MainScreen = (): JSX.Element => (
         </ul>
 
         <div className="catalog__films-list">
-          <SmallFilmCard />
-          <SmallFilmCard />
-          <SmallFilmCard />
-          <SmallFilmCard />
+          {films.map((el) => <SmallFilmCard key={el.id} name={el.name} posterImage={el.posterImage} />)}
         </div>
 
         <div className="catalog__more">
