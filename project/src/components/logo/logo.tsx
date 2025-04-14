@@ -7,7 +7,12 @@ type LogoProps = {
 }
 
 const Logo = ({ isLight }: LogoProps): JSX.Element => (
-  <div className="logo">
+  <div
+    className="logo"
+    style={
+      window.location.pathname === AppRoute.Root ? { pointerEvents: 'none' } : {}
+    }
+  >
     <Link
       to={AppRoute.Root}
       className={classNames(
