@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
@@ -10,6 +11,10 @@ type MainScreenProps = {
 
 const MainScreen = ({ films }: MainScreenProps): JSX.Element => (
   <>
+    <Helmet>
+      <title>WTW</title>
+    </Helmet>
+
     <section className="film-card">
       <div className="film-card__bg">
         <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />

@@ -1,8 +1,12 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 
 const AuthScreen = (): JSX.Element => (
   <div className="user-page">
+    <Helmet>
+      <title>WTW. Auth</title>
+    </Helmet>
     <header className="page-header user-page__head">
       <Logo />
 

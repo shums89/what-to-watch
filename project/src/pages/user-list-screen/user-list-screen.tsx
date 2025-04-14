@@ -1,9 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 
 const UserListScreen = (): JSX.Element => (
   <div className="user-page">
+    <Helmet>
+      <title>WTW. My list</title>
+    </Helmet>
     <header className="page-header user-page__head">
       <Logo />
 

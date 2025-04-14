@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
+import { Helmet } from 'react-helmet-async';
 
 const FilmScreen = (): JSX.Element => (
   <>
+    <Helmet>
+      <title>WTW. Film</title>
+    </Helmet>
+
     <section className="film-card film-card--full">
       <div className="film-card__hero">
         <div className="film-card__bg">

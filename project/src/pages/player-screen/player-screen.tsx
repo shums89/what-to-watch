@@ -1,5 +1,10 @@
+import { Helmet } from 'react-helmet-async';
+
 const PlayerScreen = (): JSX.Element => (
   <div className="player">
+    <Helmet>
+      <title>WTW. Player</title>
+    </Helmet>
     <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
     <button type="button" className="player__exit">Exit</button>
