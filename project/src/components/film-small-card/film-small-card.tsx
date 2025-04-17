@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 
-type SmallFilmCardProps = {
+type FilmSmallCardProps = {
   name: string;
-  posterImage: string;
+  previewImage: string;
 }
 
-const SmallFilmCard = ({ name, posterImage }: SmallFilmCardProps): JSX.Element => (
+const FilmSmallCard = ({ name, previewImage }: FilmSmallCardProps): JSX.Element => (
   <article className="small-film-card catalog__films-card">
     <div className="small-film-card__image">
       <img
-        src={posterImage}
+        src={previewImage}
         alt={name}
         width="280"
         height="175"
@@ -23,4 +23,4 @@ const SmallFilmCard = ({ name, posterImage }: SmallFilmCardProps): JSX.Element =
   </article>
 );
 
-export default SmallFilmCard;
+export default FilmSmallCard;
