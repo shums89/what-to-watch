@@ -9,7 +9,7 @@ type MainScreenProps = {
 };
 
 const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
-  const promoFilmIndex = Math.floor(Math.random() * films.length);
+  const promoFilmId = films[Math.floor(Math.random() * films.length)].id;
 
   return (
     <>
@@ -17,7 +17,7 @@ const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
         <title>WTW</title>
       </Helmet>
 
-      <FilmPromo id={promoFilmIndex} />
+      <FilmPromo id={promoFilmId} />
 
       <div className="page-content">
         <section className="catalog">
@@ -57,7 +57,7 @@ const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((el) => <FilmSmallCard key={el.id} name={el.name} previewImage={el.previewImage} />)}
+            {films.map((el) => <FilmSmallCard key={el.id} film={el} />)}
           </div>
 
           <div className="catalog__more">
