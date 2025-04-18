@@ -10,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App films={films.sort(() => Math.random() - 0.5).slice(0, FILMS_COUNT)} />
+    <App films={films.slice().sort(() => Math.random() - 0.5).slice(0, FILMS_COUNT)} />
   </React.StrictMode>,
 );
