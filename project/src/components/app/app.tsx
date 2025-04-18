@@ -25,7 +25,7 @@ const App = ({ films }: AppProps): JSX.Element => (
           <Route
             path={AppRoute.UserList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <UserListScreen />
               </PrivateRoute>
             }

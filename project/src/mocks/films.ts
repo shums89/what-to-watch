@@ -20,7 +20,7 @@ export const films: Film[] = [
     runTime: 104,
     genre: 'Comedy',
     released: 2000,
-    isFavorite: false,
+    isFavorite: true,
     videoLink: 'https://10.react.htmlacademy.pro/static/film/video/bike.mp4',
     previewVideoLink:
       'https://10.react.htmlacademy.pro/static/film/video/dog.mp4',
@@ -188,7 +188,7 @@ export const films: Film[] = [
     runTime: 30,
     genre: 'Comedy',
     released: 2019,
-    isFavorite: false,
+    isFavorite: true,
     videoLink: 'https://10.react.htmlacademy.pro/static/film/video/bubbles.mp4',
     previewVideoLink:
       'https://10.react.htmlacademy.pro/static/film/video/traffic.mp4',
@@ -360,7 +360,7 @@ export const films: Film[] = [
     runTime: 156,
     genre: 'Action',
     released: 2015,
-    isFavorite: false,
+    isFavorite: true,
     videoLink: 'https://10.react.htmlacademy.pro/static/film/video/bubbles.mp4',
     previewVideoLink:
       'https://10.react.htmlacademy.pro/static/film/video/traffic.mp4',
