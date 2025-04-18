@@ -2,10 +2,14 @@ import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { films } from '../../mocks/films';
 import FilmSmallCard from '../../components/film-small-card/film-small-card';
+import { Film } from '../../types/film';
 
-const UserListScreen = (): JSX.Element => {
+type UserListScreenProps = {
+  films: Film[];
+};
+
+const UserListScreen = ({ films }: UserListScreenProps): JSX.Element => {
   const userList = films.slice().filter((el) => el.isFavorite);
 
   return (

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';
 import { Film } from '../../types/film';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus, FILMS_COUNT } from '../../const';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
 import UserListScreen from '../../pages/user-list-screen/user-list-screen';
@@ -20,21 +20,21 @@ const App = ({ films }: AppProps): JSX.Element => (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<MainScreen films={films} />} />
+          <Route index element={<MainScreen films={films.slice().sort(() => Math.random() - 0.5).slice(0, FILMS_COUNT)} />} />
           <Route path={AppRoute.Login} element={<AuthScreen />} />
           <Route
             path={AppRoute.UserList}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <UserListScreen />
+                <UserListScreen films={films} />
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Films}>
             <Route index element={<NotFoundScreen />} />
             <Route path=":id">
-              <Route index element={<FilmScreen />} />
-              <Route path="review" element={<ReviewScreen />} />
+              <Route index element={<FilmScreen films={films} />} />
+              <Route path="review" element={<ReviewScreen films={films} />} />
             </Route>
           </Route>
           <Route path={AppRoute.Player} element={<PlayerScreen />} />

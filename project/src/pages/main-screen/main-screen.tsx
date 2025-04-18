@@ -9,7 +9,7 @@ type MainScreenProps = {
 };
 
 const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
-  const promoFilmId = films[Math.floor(Math.random() * films.length)].id;
+  const promoFilm = films[Math.floor(Math.random() * films.length)];
 
   return (
     <>
@@ -17,7 +17,7 @@ const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
         <title>WTW</title>
       </Helmet>
 
-      <FilmPromo id={promoFilmId} />
+      <FilmPromo film={promoFilm} />
 
       <div className="page-content">
         <section className="catalog">

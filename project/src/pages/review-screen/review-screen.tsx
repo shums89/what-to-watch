@@ -3,11 +3,14 @@ import HeaderUserBlock from '../../components/header-user-block/header-user-bloc
 import Logo from '../../components/logo/logo';
 import { Link, useParams } from 'react-router-dom';
 import { Film } from '../../types/film';
-import { films } from '../../mocks/films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute } from '../../const';
 
-const ReviewScreen = (): JSX.Element => {
+type ReviewScreenProps = {
+  films: Film[];
+};
+
+const ReviewScreen = ({ films }: ReviewScreenProps): JSX.Element => {
   const params = useParams();
   const paramsId = params.id || 0;
   const id: number = Number.isInteger(+paramsId) ? +paramsId : 0;

@@ -2,10 +2,13 @@ import { Link, useParams } from 'react-router-dom';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
-import { films } from '../../mocks/films';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { Film } from '../../types/film';
 import SimilarFilms from '../../components/similar-films/similar-films';
+
+type FilmScreenProps = {
+  films: Film[];
+};
 
 const getRatingText = (rating: number) => {
   if (!rating || rating < 0) { return ''; }
@@ -16,7 +19,7 @@ const getRatingText = (rating: number) => {
   if (rating === 10) { return 'Awesome'; }
 };
 
-const FilmScreen = (): JSX.Element => {
+const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
   const params = useParams();
   const paramsId = params.id || 0;
   const id: number = Number.isInteger(+paramsId) ? +paramsId : 0;
@@ -39,6 +42,12 @@ const FilmScreen = (): JSX.Element => {
     genre,
     released,
   } = film;
+
+  const similarFilms: Film[] = [...films.slice(0, id - 1), ...films.slice(id)]
+    .slice()
+    .filter((el) => el.genre === genre)
+    .slice(0, 4);
+
 
   return (
     <>
@@ -126,7 +135,7 @@ const FilmScreen = (): JSX.Element => {
         </div>
       </section>
 
-      <SimilarFilms />
+      <SimilarFilms films={similarFilms} />
     </>
   );
 };
