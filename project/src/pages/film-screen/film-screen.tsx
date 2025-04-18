@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import { Helmet } from 'react-helmet-async';
@@ -17,10 +17,10 @@ const getRatingText = (rating: number) => {
 };
 
 const FilmScreen = (): JSX.Element => {
-  const location = useLocation();
-  const last: string | number = location.pathname.split('/').pop() || 0;
-  const id: number = Number.isInteger(+last) ? +last : 0;
-  const film: Film = films.filter((el) => el.id === id)[0];
+  const params = useParams();
+  const paramsId = params.id || 0;
+  const id: number = Number.isInteger(+paramsId) ? +paramsId : 0;
+  const film: Film = films.filter((el) => el.id === +id)[0];
 
   if (!film) {
     return <NotFoundScreen />;
