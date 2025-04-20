@@ -3,6 +3,7 @@ import Footer from '../../components/footer/footer';
 import FilmSmallCard from '../../components/film-small-card/film-small-card';
 import { Film } from '../../types/film';
 import FilmPromo from '../../components/film-promo/film-promo';
+import { useState } from 'react';
 
 type MainScreenProps = {
   films: Film[];
@@ -10,6 +11,8 @@ type MainScreenProps = {
 
 const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
   const promoFilm = films[Math.floor(Math.random() * films.length)];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
     <>
@@ -57,7 +60,14 @@ const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((el) => <FilmSmallCard key={el.id} film={el} />)}
+            {films.map((film) => (
+              <FilmSmallCard
+                key={film.id}
+                {...film}
+                onMouseOver={() => setActiveId(film.id)}
+                onMouseOut={() => setActiveId(null)}
+              />
+            ))}
           </div>
 
           <div className="catalog__more">

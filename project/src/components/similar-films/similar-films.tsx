@@ -12,7 +12,12 @@ const SimilarFilms = ({ films }: SimilarFilmsProps): JSX.Element => (
       <h2 className="catalog__title">More like this</h2>
 
       <div className="catalog__films-list">
-        {films.map((el) => <FilmSmallCard key={el.id} film={el} />)}
+        {films.map((film) => (
+          <FilmSmallCard
+            key={film.id}
+            {...film}
+          />
+        ))}
       </div>
     </section>
 

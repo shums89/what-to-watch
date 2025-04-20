@@ -29,7 +29,12 @@ const UserListScreen = ({ films }: UserListScreenProps): JSX.Element => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {userList.map((el) => <FilmSmallCard key={el.id} film={el} />)}
+          {userList.map((film) => (
+            <FilmSmallCard
+              key={film.id}
+              {...film}
+            />
+          ))}
         </div>
       </section>
 
