@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Film } from '../../types/film';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute } from '../../const';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import RatingElement from '../../components/rating-element/rating-element';
 
 type ReviewScreenProps = {
@@ -26,7 +26,7 @@ const ReviewScreen = ({ films }: ReviewScreenProps): JSX.Element => {
   const ratingChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, rating: +target.value });
   const reviewChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, review: target.value });
 
-  const formSubmitHandle = (evt: MouseEvent<HTMLButtonElement>) => {
+  const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
   };
 
@@ -76,7 +76,10 @@ const ReviewScreen = ({ films }: ReviewScreenProps): JSX.Element => {
       </div>
 
       <div className="add-review">
-        <form action="#" className="add-review__form">
+        <form
+          action="#" className="add-review__form"
+          onSubmit={formSubmitHandle}
+        >
           <div className="rating">
             <div className="rating__stars" onChange={ratingChangeHandle}>
               {Array.from({ length: 10 }, (_, i) => i + 1)
@@ -93,7 +96,7 @@ const ReviewScreen = ({ films }: ReviewScreenProps): JSX.Element => {
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" onClick={formSubmitHandle}>Post</button>
+              <button className="add-review__btn" type="submit">Post</button>
             </div>
           </div>
         </form>
