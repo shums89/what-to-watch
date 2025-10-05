@@ -10,8 +10,7 @@ type MainScreenProps = {
 };
 
 const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
-  const promoFilm = films[Math.floor(Math.random() * films.length)];
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const promoFilm = films[0];
   const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
@@ -66,6 +65,7 @@ const MainScreen = ({ films }: MainScreenProps): JSX.Element => {
                 {...film}
                 onMouseOver={() => setActiveId(film.id)}
                 onMouseOut={() => setActiveId(null)}
+                isActive={activeId === film.id}
               />
             ))}
           </div>

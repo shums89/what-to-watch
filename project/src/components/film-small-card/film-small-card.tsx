@@ -1,29 +1,26 @@
 import { Link } from 'react-router-dom';
 import { Film } from '../../types/film';
 import { AppRoute } from '../../const';
+import VideoPlayer from '../video-player/video-player';
 
 type FilmSmallCardProps = Film & {
   onMouseOver?: (id: number) => void;
   onMouseOut?: () => void;
+  isActive?: boolean;
 }
 
-const FilmSmallCard = ({ id, name, previewImage, onMouseOver, onMouseOut }: FilmSmallCardProps): JSX.Element => (
+const FilmSmallCard = ({ onMouseOver, onMouseOut, isActive, ...film }: FilmSmallCardProps): JSX.Element => (
   <article
     className="small-film-card catalog__films-card"
-    onMouseOver={() => onMouseOver ? onMouseOver(id) : null}
+    onMouseOver={() => onMouseOver ? onMouseOver(film.id) : null}
     onMouseOut={() => onMouseOut ? onMouseOut() : null}
   >
     <div className="small-film-card__image">
-      <img
-        src={previewImage}
-        alt={name}
-        width="280"
-        height="175"
-      />
+      <VideoPlayer isPlaying={isActive || false} {...film} />
     </div>
     <h3 className="small-film-card__title">
-      <Link to={`${AppRoute.Films}/${id}`} className="small-film-card__link">
-        {name}
+      <Link to={`${AppRoute.Films}/${film.id}`} className="small-film-card__link">
+        {film.name}
       </Link>
     </h3>
   </article>
