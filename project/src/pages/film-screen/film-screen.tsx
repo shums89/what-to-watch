@@ -5,18 +5,10 @@ import { Helmet } from 'react-helmet-async';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { Film } from '../../types/film';
 import SimilarFilms from '../../components/similar-films/similar-films';
+import FilmTabs from '../../components/film-tabs/film-tabs';
 
 type FilmScreenProps = {
   films: Film[];
-};
-
-const getRatingText = (rating: number) => {
-  if (!rating || rating < 0) { return ''; }
-  if (rating < 3) { return 'Bad'; }
-  if (rating < 5) { return 'Normal'; }
-  if (rating < 8) { return 'Good'; }
-  if (rating < 10) { return 'Very good'; }
-  if (rating === 10) { return 'Awesome'; }
 };
 
 const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
@@ -34,11 +26,6 @@ const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
     posterImage,
     backgroundImage,
     backgroundColor,
-    description,
-    rating,
-    scoresCount,
-    director,
-    starring,
     genre,
     released,
   } = film;
@@ -47,7 +34,6 @@ const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
     .slice()
     .filter((el) => el.genre === genre)
     .slice(0, 4);
-
 
   return (
     <>
@@ -102,35 +88,7 @@ const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{getRatingText(rating)}</span>
-                  <span className="film-rating__count">{scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{description}</p>
-                <p className="film-card__director"><strong>Director: {director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {starring.join(', ')} and other</strong></p>
-              </div>
-            </div>
+            <FilmTabs film={film} />
           </div>
         </div>
       </section>
