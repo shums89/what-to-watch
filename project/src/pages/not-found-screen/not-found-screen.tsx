@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
 import { AppRoute } from '../../const';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import { Helmet } from 'react-helmet-async';
 
 const NotFoundScreen = (): JSX.Element => (
   <div className="user-page">

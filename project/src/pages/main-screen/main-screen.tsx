@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
+
+import type { Film } from '../../types/types';
+
 import Footer from '../../components/footer/footer';
-import { Film } from '../../types/film';
 import FilmPromo from '../../components/film-promo/film-promo';
 import FilmsList from '../../components/films-list/films-list';
 

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Film } from '../../types/film';
+
+import type { Film } from '../../types/types';
+
 import { AppRoute } from '../../const';
 import VideoPlayer from '../video-player/video-player';
 

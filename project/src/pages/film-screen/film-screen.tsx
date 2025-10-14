@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
+import type { Film } from '../../types/types';
+
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { Helmet } from 'react-helmet-async';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { Film } from '../../types/film';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 

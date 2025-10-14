@@ -1,11 +1,13 @@
 import { Helmet } from 'react-helmet-async';
+import { Link, useParams } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useState } from 'react';
+
+import { Film } from '../../types/types';
+
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../types/film';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute } from '../../const';
-import { ChangeEvent, FormEvent, useState } from 'react';
 import RatingElement from '../../components/rating-element/rating-element';
 
 type ReviewScreenProps = {

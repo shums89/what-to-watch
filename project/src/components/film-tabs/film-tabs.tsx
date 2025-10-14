@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Film } from '../../types/film';
+
+import type { Film } from '../../types/types';
+
 import FilmTabsOverview from '../film-tabs-overview/film-tabs-overview';
 import FilmTabsDetails from '../film-tabs-details/film-tabs-details';
 import FilmTabsReviews from '../film-tabs-reviews/film-tabs-reviews';

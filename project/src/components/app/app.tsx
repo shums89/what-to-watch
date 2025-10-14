@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+
+import type { Film } from '../../types/types';
+
 import MainScreen from '../../pages/main-screen/main-screen';
-import { Film } from '../../types/film';
 import { AppRoute, AuthorizationStatus, FILMS_COUNT } from '../../const';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
@@ -9,7 +12,7 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import ReviewScreen from '../../pages/review-screen/review-screen';
 import PrivateRoute from '../private-route/private-route';
-import { HelmetProvider } from 'react-helmet-async';
+
 
 type AppProps = {
   films: Film[];

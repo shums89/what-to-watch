@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import classNames from 'classnames';
+
+import { AppRoute } from '../../const';
 
 type LogoProps = {
   isLight?: boolean;
