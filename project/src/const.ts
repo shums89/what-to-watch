@@ -1,4 +1,4 @@
-export const FILMS_COUNT = 8;
+export const FILM_COUNT_PER_STEP = 4;
 export const DEFAULT_GENRE = 'All genres';
 
 export enum AppRoute {

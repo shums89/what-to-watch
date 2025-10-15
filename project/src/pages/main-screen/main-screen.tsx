@@ -4,11 +4,13 @@ import Footer from '../../components/footer/footer';
 import FilmPromo from '../../components/film-promo/film-promo';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
-import { DEFAULT_GENRE, FILMS_COUNT } from '../../const';
 import GenresList from '../../components/genres-list/genres-list';
+import FilmsShowMore from '../../components/films-show-more/films-show-more';
 
 const MainScreen = (): JSX.Element => {
-  const films = useAppSelector((state) => state.films.filter((film) => film.genre === state.genre || state.genre === DEFAULT_GENRE).slice(0, FILMS_COUNT));
+  const films = useAppSelector((state) => state.films.filter((film) => film.genre === state.genre || state.genre === 'All genres'));
+  const countFilms = useAppSelector((state) => state.count);
+  const isVisible: boolean = films.length > countFilms;
 
   return (
     <>
@@ -24,11 +26,9 @@ const MainScreen = (): JSX.Element => {
 
           <GenresList />
 
-          <FilmsList films={films} />
+          <FilmsList films={films.slice(0, countFilms)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {isVisible && <FilmsShowMore />}
         </section>
 
         <Footer />
