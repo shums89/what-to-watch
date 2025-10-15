@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
-import type { Film } from '../../types/types';
-
 import MainScreen from '../../pages/main-screen/main-screen';
-import { AppRoute, AuthorizationStatus, FILMS_COUNT } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
 import UserListScreen from '../../pages/user-list-screen/user-list-screen';
@@ -12,18 +10,14 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import ReviewScreen from '../../pages/review-screen/review-screen';
 import PrivateRoute from '../private-route/private-route';
+import { films } from '../../mocks/films';
 
-
-type AppProps = {
-  films: Film[];
-};
-
-const App = ({ films }: AppProps): JSX.Element => (
+const App = (): JSX.Element => (
   <HelmetProvider>
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<MainScreen films={films.slice().sort(() => Math.random() - 0.5).slice(0, FILMS_COUNT)} />} />
+          <Route index element={<MainScreen />} />
           <Route path={AppRoute.Login} element={<AuthScreen />} />
           <Route
             path={AppRoute.UserList}

@@ -1,4 +1,5 @@
 export const FILMS_COUNT = 8;
+export const DEFAULT_GENRE = 'All genres';
 
 export enum AppRoute {
   Root = '/',
