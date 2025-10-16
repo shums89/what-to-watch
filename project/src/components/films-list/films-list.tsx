@@ -3,6 +3,8 @@ import { useState } from 'react';
 import type { Film } from '../../types/types';
 
 import FilmSmallCard from '../film-small-card/film-small-card';
+import { useAppSelector } from '../../hooks';
+import Spinner from '../../spinner/spinner';
 
 type FilmsListProps = {
   films: Film[];
@@ -10,6 +12,11 @@ type FilmsListProps = {
 
 const FilmsList = ({ films }: FilmsListProps): JSX.Element => {
   const [activeId, setActiveId] = useState<number | null>(null);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  if (isOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="catalog__films-list">

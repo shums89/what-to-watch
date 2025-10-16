@@ -8,6 +8,7 @@ import GenresList from '../../components/genres-list/genres-list';
 import FilmsShowMore from '../../components/films-show-more/films-show-more';
 
 const MainScreen = (): JSX.Element => {
+  const promo = useAppSelector((state) => state.promo);
   const films = useAppSelector((state) => state.films.filter((film) => film.genre === state.genre || state.genre === 'All genres'));
   const countFilms = useAppSelector((state) => state.count);
   const isVisible: boolean = films.length > countFilms;
@@ -18,7 +19,7 @@ const MainScreen = (): JSX.Element => {
         <title>WTW</title>
       </Helmet>
 
-      <FilmPromo />
+      {promo && (<FilmPromo promo={promo} />)}
 
       <div className="page-content">
         <section className="catalog">

@@ -10,6 +10,11 @@ export enum AppRoute {
   Player = '/player',
 }
 
+export enum ApiRoute {
+  Films = '/films',
+  Promo = '/promo',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

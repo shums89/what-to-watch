@@ -10,7 +10,6 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import ReviewScreen from '../../pages/review-screen/review-screen';
 import PrivateRoute from '../private-route/private-route';
-import { films } from '../../mocks/films';
 
 const App = (): JSX.Element => (
   <HelmetProvider>
@@ -23,15 +22,15 @@ const App = (): JSX.Element => (
             path={AppRoute.UserList}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <UserListScreen films={films} />
+                <UserListScreen films={[]} />
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Films}>
             <Route index element={<NotFoundScreen />} />
             <Route path=":id">
-              <Route index element={<FilmScreen films={films} />} />
-              <Route path="review" element={<ReviewScreen films={films} />} />
+              <Route index element={<FilmScreen films={[]} />} />
+              <Route path="review" element={<ReviewScreen films={[]} />} />
             </Route>
           </Route>
           <Route path={AppRoute.Player} element={<PlayerScreen />} />

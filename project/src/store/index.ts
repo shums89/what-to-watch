@@ -1,13 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { reducer } from './reducer';
-import { setFilms } from './action';
-import { films } from '../mocks/films';
+import { fetchFilms, fetchPromo } from './action';
+import { createAPI } from '../services/api';
 
+export const api = createAPI();
 const store = configureStore({
   reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
 });
 
-store.dispatch(setFilms(films));
+store.dispatch(fetchPromo());
+store.dispatch(fetchFilms());
 
 export default store;

@@ -1,10 +1,22 @@
-import { films } from '../../mocks/films';
+import { Film } from '../../types/types';
 
 import HeaderUserBlock from '../header-user-block/header-user-block';
 import Logo from '../logo/logo';
 
-const FilmPromo = (): JSX.Element => {
-  const { name, posterImage, backgroundImage, genre, released } = films[0];
+// type Promo = {
+//   name: null;
+//   posterImage: null;
+//   backgroundImage: null;
+//   genre: null;
+//   released: null;
+// }
+
+type PromoProps = {
+  promo: Film;
+}
+
+const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
+  const { name, posterImage, backgroundImage, genre, released } = promo;
 
   return (
     <section className="film-card">
