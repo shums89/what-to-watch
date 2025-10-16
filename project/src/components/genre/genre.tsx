@@ -1,4 +1,4 @@
-// import { FormEvent } from 'react';
+import { MouseEvent } from 'react';
 
 type GenreProps = {
   name: string;
@@ -7,17 +7,17 @@ type GenreProps = {
 }
 
 const Genre = ({ name, isActive, onClick }: GenreProps): JSX.Element => {
-  const handleGenreClick = () => {
+  const handleItemClick = (evt: MouseEvent) => {
+    evt.preventDefault();
     onClick(name);
   };
 
-  // const handleLinkClick = (evt: FormEvent<HTMLFormElement>) => {
-  //   evt.preventDefault();
-  // };
-
   return (
-    <li className={`catalog__genres-item ${isActive ? 'catalog__genres-item--active' : ''}`} onClick={handleGenreClick}>
-      <a className="catalog__genres-link">{name}</a>
+    <li
+      className={`catalog__genres-item ${isActive ? 'catalog__genres-item--active' : ''}`}
+      onClick={handleItemClick}
+    >
+      <a href='#' className="catalog__genres-link" >{name}</a>
     </li>
   );
 };
