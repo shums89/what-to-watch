@@ -6,12 +6,10 @@ import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
+import { useAppSelector } from '../../hooks';
 
-type UserListScreenProps = {
-  films: Film[];
-};
-
-const UserListScreen = ({ films }: UserListScreenProps): JSX.Element => {
+const UserListScreen = (): JSX.Element => {
+  const films: Film[] = useAppSelector((state) => state.films);
   const userList = films.slice().filter((el) => el.isFavorite);
 
   return (

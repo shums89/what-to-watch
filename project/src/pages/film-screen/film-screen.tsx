@@ -8,34 +8,19 @@ import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import FilmTabs from '../../components/film-tabs/film-tabs';
+import { useAppSelector } from '../../hooks';
 
-type FilmScreenProps = {
-  films: Film[];
-};
-
-const FilmScreen = ({ films }: FilmScreenProps): JSX.Element => {
+const FilmScreen = (): JSX.Element => {
   const params = useParams();
-  const paramsId = params.id || 0;
-  const id: number = Number.isInteger(+paramsId) ? +paramsId : 0;
-  const film: Film = films.filter((el) => el.id === +id)[0];
+  const films: Film[] = useAppSelector((state) => state.films);
+  const film: Film | null = (Number.isInteger(Number(params.id)) && films.filter((el) => el.id === Number(params.id))[0]) || null;
 
   if (!film) {
     return <NotFoundScreen />;
   }
 
-  const {
-    name,
-    posterImage,
-    backgroundImage,
-    backgroundColor,
-    genre,
-    released,
-  } = film;
-
-  const similarFilms: Film[] = [...films.slice(0, id - 1), ...films.slice(id)]
-    .slice()
-    .filter((el) => el.genre === genre)
-    .slice(0, 4);
+  const { name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
+  const similarFilms: Film[] = films.filter((el) => el.genre === genre && el.id !== film.id).slice(0, 4);
 
   return (
     <>

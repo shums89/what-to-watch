@@ -9,17 +9,15 @@ import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute } from '../../const';
 import RatingElement from '../../components/rating-element/rating-element';
-
-type ReviewScreenProps = {
-  films: Film[];
-};
+import { useAppSelector } from '../../hooks';
 
 type formData = {
   rating: number | null;
   review: string | null;
 }
 
-const ReviewScreen = ({ films }: ReviewScreenProps): JSX.Element => {
+const ReviewScreen = (): JSX.Element => {
+  const films: Film[] = useAppSelector((state) => state.films);
   const [formData, setFormData] = useState<formData>({
     rating: null,
     review: null,

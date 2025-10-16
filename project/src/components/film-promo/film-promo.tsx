@@ -3,14 +3,6 @@ import { Film } from '../../types/types';
 import HeaderUserBlock from '../header-user-block/header-user-block';
 import Logo from '../logo/logo';
 
-// type Promo = {
-//   name: null;
-//   posterImage: null;
-//   backgroundImage: null;
-//   genre: null;
-//   released: null;
-// }
-
 type PromoProps = {
   promo: Film;
 }

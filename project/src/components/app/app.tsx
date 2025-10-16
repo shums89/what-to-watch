@@ -22,15 +22,15 @@ const App = (): JSX.Element => (
             path={AppRoute.UserList}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <UserListScreen films={[]} />
+                <UserListScreen />
               </PrivateRoute>
             }
           />
           <Route path={AppRoute.Films}>
             <Route index element={<NotFoundScreen />} />
             <Route path=":id">
-              <Route index element={<FilmScreen films={[]} />} />
-              <Route path="review" element={<ReviewScreen films={[]} />} />
+              <Route index element={<FilmScreen />} />
+              <Route path="review" element={<ReviewScreen />} />
             </Route>
           </Route>
           <Route path={AppRoute.Player} element={<PlayerScreen />} />
