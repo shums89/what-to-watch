@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { Film } from '../../types/types';
+import type { Film } from '../../types/film';
 
 import FilmTabsOverview from '../film-tabs-overview/film-tabs-overview';
 import FilmTabsDetails from '../film-tabs-details/film-tabs-details';

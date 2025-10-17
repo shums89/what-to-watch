@@ -1,4 +1,4 @@
-import type { Film } from '../../types/types';
+import type { Film } from '../../types/film';
 
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';

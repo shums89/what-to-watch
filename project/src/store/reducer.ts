@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import type { Film } from '../types/types';
+import type { Film } from '../types/film';
 
 import { fetchFilms, fetchPromo, setCountFilms, setGenre } from './action';
 import { DEFAULT_GENRE, FILM_COUNT_PER_STEP } from '../const';

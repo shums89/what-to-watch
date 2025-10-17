@@ -1,4 +1,4 @@
-import { Film } from '../../types/types';
+import { Film } from '../../types/film';
 
 import HeaderUserBlock from '../header-user-block/header-user-block';
 import Logo from '../logo/logo';

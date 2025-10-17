@@ -1,7 +1,7 @@
 import type { AxiosInstance } from 'axios';
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { Film } from '../types/types';
+import type { Film } from '../types/film';
 import { ApiRoute } from '../const';
 
 export const Action = {

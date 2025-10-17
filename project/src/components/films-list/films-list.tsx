@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { Film } from '../../types/types';
+import type { Film } from '../../types/film';
 
 import FilmSmallCard from '../film-small-card/film-small-card';
 import { useAppSelector } from '../../hooks';

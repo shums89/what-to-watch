@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { Film } from '../../types/types';
+import { Film } from '../../types/film';
 
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';

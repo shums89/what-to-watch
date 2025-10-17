@@ -1,4 +1,4 @@
-import type { Film } from '../../types/types';
+import type { Film } from '../../types/film';
 
 type FilmTabsOverviewProps = Film;
 

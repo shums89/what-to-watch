@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-import type { Film } from '../../types/types';
+import type { Film } from '../../types/film';
 
 type VideoPlayerProps = Film & {
   isPlaying: boolean;
