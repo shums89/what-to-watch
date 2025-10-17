@@ -12,9 +12,9 @@ type FilmsListProps = {
 
 const FilmsList = ({ films }: FilmsListProps): JSX.Element => {
   const [activeId, setActiveId] = useState<number | null>(null);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
 
-  if (isOffersLoading) {
+  if (isFilmsDataLoading) {
     return <Spinner />;
   }
 

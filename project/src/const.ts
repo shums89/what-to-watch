@@ -10,7 +10,7 @@ export enum AppRoute {
   Player = '/player',
 }
 
-export enum ApiRoute {
+export enum APIRoute {
   Films = '/films',
   Promo = '/promo',
 }

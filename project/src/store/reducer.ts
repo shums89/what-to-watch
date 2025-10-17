@@ -2,14 +2,20 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import type { Film } from '../types/film';
 
-import { fetchFilms, fetchPromo, setCountFilms, setGenre } from './action';
+import {
+  loadFilms,
+  loadPromo,
+  setCountDisplayedFilms,
+  setFilmsDataLoadingStatus,
+  setFilterGenre,
+} from './action';
 import { DEFAULT_GENRE, FILM_COUNT_PER_STEP } from '../const';
 
 type State = {
   genre: string;
   promo: Film | null;
   films: Film[];
-  isOffersLoading: boolean;
+  isFilmsDataLoading: boolean;
   count: number;
 };
 
@@ -17,28 +23,27 @@ const initialState: State = {
   genre: DEFAULT_GENRE,
   promo: null,
   films: [],
-  isOffersLoading: false,
+  isFilmsDataLoading: false,
   count: FILM_COUNT_PER_STEP,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setGenre, (state, action) => {
+    .addCase(setFilterGenre, (state, action) => {
       state.genre = action.payload;
       state.count = FILM_COUNT_PER_STEP;
     })
-    .addCase(fetchPromo.fulfilled, (state, action) => {
+    .addCase(loadPromo, (state, action) => {
       state.promo = action.payload;
     })
-    .addCase(fetchFilms.pending, (state) => {
-      state.isOffersLoading = true;
-    })
-    .addCase(fetchFilms.fulfilled, (state, action) => {
+    .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
       state.count = FILM_COUNT_PER_STEP;
-      state.isOffersLoading = false;
     })
-    .addCase(setCountFilms, (state) => {
+    .addCase(setFilmsDataLoadingStatus, (state, action) => {
+      state.isFilmsDataLoading = action.payload;
+    })
+    .addCase(setCountDisplayedFilms, (state) => {
       state.count = state.count + FILM_COUNT_PER_STEP;
     });
 });
