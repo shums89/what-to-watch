@@ -5,11 +5,18 @@ import type { Film } from '../types/film';
 import {
   loadFilms,
   loadPromo,
+  loginUser,
+  requireAuthorization,
   setCountDisplayedFilms,
   setFilmsDataLoadingStatus,
   setFilterGenre,
 } from './action';
-import { DEFAULT_GENRE, FILM_COUNT_PER_STEP } from '../const';
+import {
+  AuthorizationStatus,
+  DEFAULT_GENRE,
+  FILM_COUNT_PER_STEP,
+} from '../const';
+import { UserData } from '../types/user-data';
 
 type State = {
   genre: string;
@@ -17,6 +24,8 @@ type State = {
   films: Film[];
   isFilmsDataLoading: boolean;
   count: number;
+  authorizationStatus: AuthorizationStatus;
+  user: UserData | null;
 };
 
 const initialState: State = {
@@ -25,6 +34,8 @@ const initialState: State = {
   films: [],
   isFilmsDataLoading: false,
   count: FILM_COUNT_PER_STEP,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  user: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -45,5 +56,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCountDisplayedFilms, (state) => {
       state.count = state.count + FILM_COUNT_PER_STEP;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(loginUser, (state, action) => {
+      state.user = action.payload;
     });
 });
