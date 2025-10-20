@@ -5,11 +5,13 @@ import type { Film } from '../types/film';
 import type { AppDispatch, State } from '../types/state';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import {
+  loadFilm,
   loadFilms,
   loadPromo,
   loginUser,
   redirectToRoute,
   requireAuthorization,
+  setFilmDataLoadingStatus,
   setFilmsDataLoadingStatus,
 } from './action';
 import { AuthData } from '../types/auth-data';
@@ -18,8 +20,9 @@ import { dropToken, saveToken } from '../services/token';
 
 const Action = {
   data: {
-    FETCH_FILMS: 'data/fetchFilms',
     FETCH_PROMO: 'data/fetchPromo',
+    FETCH_FILMS: 'data/fetchFilms',
+    FETCH_FILM: 'data/fetchFilm',
   },
   user: {
     CHECK_AUTH: 'user/checkAuth',
@@ -27,6 +30,19 @@ const Action = {
     LOGOUT: 'user/logout',
   },
 } as const;
+
+export const fetchPromoAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.data.FETCH_PROMO, async (_arg, { dispatch, extra: api }) => {
+  const { data } = await api.get<Film>(APIRoute.Promo);
+  dispatch(loadPromo(data));
+});
 
 export const fetchFilmsAction = createAsyncThunk<
   void,
@@ -43,17 +59,23 @@ export const fetchFilmsAction = createAsyncThunk<
   dispatch(loadFilms(data));
 });
 
-export const fetchPromoAction = createAsyncThunk<
+export const fetchFilmAction = createAsyncThunk<
   void,
-  undefined,
+  Film['id'],
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
->(Action.data.FETCH_PROMO, async (_arg, { dispatch, extra: api }) => {
-  const { data } = await api.get<Film>(APIRoute.Promo);
-  dispatch(loadPromo(data));
+>(Action.data.FETCH_FILM, async (id, { dispatch, extra: api }) => {
+  try {
+    dispatch(setFilmDataLoadingStatus(true));
+    const { data } = await api.get<Film>(`${APIRoute.Films}/${id}`);
+    dispatch(setFilmDataLoadingStatus(false));
+    dispatch(loadFilm(data));
+  } catch {
+    dispatch(redirectToRoute(AppRoute.NotFound));
+  }
 });
 
 export const checkAuthAction = createAsyncThunk<

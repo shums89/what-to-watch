@@ -3,11 +3,13 @@ import { createReducer } from '@reduxjs/toolkit';
 import type { Film } from '../types/film';
 
 import {
+  loadFilm,
   loadFilms,
   loadPromo,
   loginUser,
   requireAuthorization,
   setCountDisplayedFilms,
+  setFilmDataLoadingStatus,
   setFilmsDataLoadingStatus,
   setFilterGenre,
 } from './action';
@@ -23,6 +25,8 @@ type State = {
   promo: Film | null;
   films: Film[];
   isFilmsDataLoading: boolean;
+  film: Film | null;
+  isFilmDataLoading: boolean;
   count: number;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
@@ -33,6 +37,8 @@ const initialState: State = {
   promo: null,
   films: [],
   isFilmsDataLoading: false,
+  film: null,
+  isFilmDataLoading: false,
   count: FILM_COUNT_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
@@ -53,6 +59,12 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setFilmsDataLoadingStatus, (state, action) => {
       state.isFilmsDataLoading = action.payload;
+    })
+    .addCase(loadFilm, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(setFilmDataLoadingStatus, (state, action) => {
+      state.isFilmDataLoading = action.payload;
     })
     .addCase(setCountDisplayedFilms, (state) => {
       state.count = state.count + FILM_COUNT_PER_STEP;

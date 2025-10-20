@@ -10,9 +10,11 @@ export const Action = {
     SET_COUNT_FILMS: 'film/setCountDisplayedFilms',
   },
   data: {
-    LOAD_FILMS: 'data/loadFilms',
     LOAD_PROMO: 'data/loadPromo',
+    LOAD_FILMS: 'data/loadFilms',
+    LOAD_FILM: 'data/loadFilm',
     SET_FILMS_DATA_LOADING_STATUS: 'data/setFilmsDataLoadingStatus',
+    SET_FILM_DATA_LOADING_STATUS: 'data/setFilmDataLoadingStatus',
   },
   user: {
     REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
@@ -26,10 +28,14 @@ export const Action = {
 export const setFilterGenre = createAction<string>(Action.film.SET_GENRE);
 export const setCountDisplayedFilms = createAction(Action.film.SET_COUNT_FILMS);
 
-export const loadFilms = createAction<Film[]>(Action.data.LOAD_FILMS);
 export const loadPromo = createAction<Film>(Action.data.LOAD_PROMO);
+export const loadFilms = createAction<Film[]>(Action.data.LOAD_FILMS);
+export const loadFilm = createAction<Film>(Action.data.LOAD_FILM);
 export const setFilmsDataLoadingStatus = createAction<boolean>(
   Action.data.SET_FILMS_DATA_LOADING_STATUS
+);
+export const setFilmDataLoadingStatus = createAction<boolean>(
+  Action.data.SET_FILM_DATA_LOADING_STATUS
 );
 
 export const requireAuthorization = createAction<AuthorizationStatus>(

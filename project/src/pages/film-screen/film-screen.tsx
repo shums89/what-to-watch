@@ -1,22 +1,34 @@
 import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 import type { Film } from '../../types/film';
 
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import FilmTabs from '../../components/film-tabs/film-tabs';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction } from '../../store/api-actions';
+import Spinner from '../../spinner/spinner';
 
-const FilmScreen = (): JSX.Element => {
+const FilmScreen = (): JSX.Element | null => {
   const params = useParams();
+  const dispatch = useAppDispatch();
   const films: Film[] = useAppSelector((state) => state.films);
-  const film: Film | null = (Number.isInteger(Number(params.id)) && films.filter((el) => el.id === Number(params.id))[0]) || null;
+  const film: Film | null = useAppSelector((state) => state.film);
+  const isFilmDataLoading: boolean = useAppSelector((state) => state.isFilmDataLoading);
 
-  if (!film) {
-    return <NotFoundScreen />;
+  useEffect(() => {
+    const { id } = params;
+    if (id) {
+      const parsedId = Number(id);
+      dispatch(fetchFilmAction(parsedId));
+    }
+  }, [params, dispatch]);
+
+  if (isFilmDataLoading || !film) {
+    return <Spinner />;
   }
 
   const { name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
