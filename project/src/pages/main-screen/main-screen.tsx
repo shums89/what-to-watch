@@ -1,17 +1,25 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 import Footer from '../../components/footer/footer';
 import FilmPromo from '../../components/film-promo/film-promo';
 import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsShowMore from '../../components/films-show-more/films-show-more';
+import { fetchFilmsAction, fetchPromoAction } from '../../store/api-actions';
 
 const MainScreen = (): JSX.Element => {
   const promo = useAppSelector((state) => state.promo);
   const films = useAppSelector((state) => state.films.filter((film) => film.genre === state.genre || state.genre === 'All genres'));
   const countFilms = useAppSelector((state) => state.count);
   const isVisible: boolean = films.length > countFilms;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPromoAction());
+    dispatch(fetchFilmsAction());
+  }, [dispatch]);
 
   return (
     <>
