@@ -11,12 +11,14 @@ import FilmTabs from '../../components/film-tabs/film-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
+import { AuthorizationStatus } from '../../const';
 
 const FilmScreen = (): JSX.Element | null => {
   const params = useParams();
   const dispatch = useAppDispatch();
   const film: Film | null = useAppSelector((state) => state.film);
   const isFilmDataLoading: boolean = useAppSelector((state) => state.isFilmDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
     const { id } = params;
@@ -73,7 +75,8 @@ const FilmScreen = (): JSX.Element | null => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to="review" className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth &&
+                  (<Link to="review" className="btn film-card__button">Add review</Link>)}
               </div>
             </div>
           </div>
