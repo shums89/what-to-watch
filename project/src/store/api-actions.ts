@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
+import { StatusCodes } from 'http-status-codes';
 
 import type { Film } from '../types/film';
 import type { AppDispatch, State } from '../types/state';
@@ -73,8 +74,12 @@ export const fetchFilmAction = createAsyncThunk<
     const { data } = await api.get<Film>(`${APIRoute.Films}/${id}`);
     dispatch(setFilmDataLoadingStatus(false));
     dispatch(loadFilm(data));
-  } catch {
-    dispatch(redirectToRoute(AppRoute.NotFound));
+  } catch (error) {
+    const axiosError = error as AxiosError;
+
+    if (axiosError.response?.status === StatusCodes.NOT_FOUND) {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
   }
 });
 
