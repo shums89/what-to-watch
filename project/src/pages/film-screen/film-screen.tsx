@@ -15,7 +15,6 @@ import Spinner from '../../spinner/spinner';
 const FilmScreen = (): JSX.Element | null => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const films: Film[] = useAppSelector((state) => state.films);
   const film: Film | null = useAppSelector((state) => state.film);
   const isFilmDataLoading: boolean = useAppSelector((state) => state.isFilmDataLoading);
 
@@ -32,7 +31,6 @@ const FilmScreen = (): JSX.Element | null => {
   }
 
   const { name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
-  const similarFilms: Film[] = films.filter((el) => el.genre === genre && el.id !== film.id).slice(0, 4);
 
   return (
     <>
@@ -92,7 +90,7 @@ const FilmScreen = (): JSX.Element | null => {
         </div>
       </section>
 
-      <SimilarFilms films={similarFilms} />
+      <SimilarFilms id={film.id} />
     </>
   );
 };

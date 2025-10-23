@@ -9,6 +9,7 @@ import {
   loadFilm,
   loadFilms,
   loadPromo,
+  loadSimilarFilms,
   loginUser,
   redirectToRoute,
   requireAuthorization,
@@ -24,6 +25,7 @@ const Action = {
     FETCH_PROMO: 'data/fetchPromo',
     FETCH_FILMS: 'data/fetchFilms',
     FETCH_FILM: 'data/fetchFilm',
+    FETCH_SIMILAR_FILM: 'data/fetchSimilarFilms',
   },
   user: {
     CHECK_AUTH: 'user/checkAuth',
@@ -81,6 +83,19 @@ export const fetchFilmAction = createAsyncThunk<
       dispatch(redirectToRoute(AppRoute.NotFound));
     }
   }
+});
+
+export const fetchSimilarFilmsAction = createAsyncThunk<
+  void,
+  Film['id'],
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.data.FETCH_SIMILAR_FILM, async (id, { dispatch, extra: api }) => {
+  const { data } = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
+  dispatch(loadSimilarFilms(data));
 });
 
 export const checkAuthAction = createAsyncThunk<

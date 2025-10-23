@@ -13,6 +13,7 @@ export const Action = {
     LOAD_PROMO: 'data/loadPromo',
     LOAD_FILMS: 'data/loadFilms',
     LOAD_FILM: 'data/loadFilm',
+    LOAD_SIMILAR_FILMS: 'data/loadSimilarFilms',
     SET_FILMS_DATA_LOADING_STATUS: 'data/setFilmsDataLoadingStatus',
     SET_FILM_DATA_LOADING_STATUS: 'data/setFilmDataLoadingStatus',
   },
@@ -36,6 +37,9 @@ export const setFilmsDataLoadingStatus = createAction<boolean>(
 );
 export const setFilmDataLoadingStatus = createAction<boolean>(
   Action.data.SET_FILM_DATA_LOADING_STATUS
+);
+export const loadSimilarFilms = createAction<Film[]>(
+  Action.data.LOAD_SIMILAR_FILMS
 );
 
 export const requireAuthorization = createAction<AuthorizationStatus>(

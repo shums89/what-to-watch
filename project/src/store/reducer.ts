@@ -6,6 +6,7 @@ import {
   loadFilm,
   loadFilms,
   loadPromo,
+  loadSimilarFilms,
   loginUser,
   requireAuthorization,
   setCountDisplayedFilms,
@@ -27,6 +28,7 @@ type State = {
   isFilmsDataLoading: boolean;
   film: Film | null;
   isFilmDataLoading: boolean;
+  similarFilms: Film[];
   count: number;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
@@ -39,6 +41,7 @@ const initialState: State = {
   isFilmsDataLoading: false,
   film: null,
   isFilmDataLoading: false,
+  similarFilms: [],
   count: FILM_COUNT_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
@@ -65,6 +68,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setFilmDataLoadingStatus, (state, action) => {
       state.isFilmDataLoading = action.payload;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
     })
     .addCase(setCountDisplayedFilms, (state) => {
       state.count = state.count + FILM_COUNT_PER_STEP;

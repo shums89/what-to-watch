@@ -2,22 +2,34 @@ import type { Film } from '../../types/film';
 
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchSimilarFilmsAction } from '../../store/api-actions';
 
 type SimilarFilmsProps = {
-  films: Film[];
+  id: number;
 };
 
-const SimilarFilms = ({ films }: SimilarFilmsProps): JSX.Element => (
-  <div className="page-content">
-    <section className="catalog catalog--like-this">
-      <h2 className="catalog__title">More like this</h2>
+const SimilarFilms = ({ id }: SimilarFilmsProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const films: Film[] = useAppSelector((state) => state.similarFilms);
 
-      <FilmsList films={films} />
-    </section>
+  useEffect(() => {
+    dispatch(fetchSimilarFilmsAction(id));
+  }, [id, dispatch]);
 
-    <Footer />
-  </div>
-);
+  return (
+    <div className="page-content">
+      <section className="catalog catalog--like-this">
+        <h2 className="catalog__title">More like this</h2>
+
+        <FilmsList films={films} />
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
 
 
 export default SimilarFilms;
