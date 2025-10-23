@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import type { Film } from '../types/film';
+import type { Comment, Film } from '../types/film';
 
 import {
+  loadComments,
   loadFilm,
   loadFilms,
   loadPromo,
@@ -29,6 +30,7 @@ type State = {
   film: Film | null;
   isFilmDataLoading: boolean;
   similarFilms: Film[];
+  comments: Comment[];
   count: number;
   authorizationStatus: AuthorizationStatus;
   user: UserData | null;
@@ -42,6 +44,7 @@ const initialState: State = {
   film: null,
   isFilmDataLoading: false,
   similarFilms: [],
+  comments: [],
   count: FILM_COUNT_PER_STEP,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
@@ -71,6 +74,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     })
     .addCase(setCountDisplayedFilms, (state) => {
       state.count = state.count + FILM_COUNT_PER_STEP;

@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import type { Film } from '../types/film';
+import type { Comment, Film } from '../types/film';
 import { AppRoute, AuthorizationStatus } from '../const';
 import { UserData } from '../types/user-data';
 
@@ -14,6 +14,7 @@ export const Action = {
     LOAD_FILMS: 'data/loadFilms',
     LOAD_FILM: 'data/loadFilm',
     LOAD_SIMILAR_FILMS: 'data/loadSimilarFilms',
+    LOAD_COMMENTS: 'data/loadComments',
     SET_FILMS_DATA_LOADING_STATUS: 'data/setFilmsDataLoadingStatus',
     SET_FILM_DATA_LOADING_STATUS: 'data/setFilmDataLoadingStatus',
   },
@@ -32,14 +33,15 @@ export const setCountDisplayedFilms = createAction(Action.film.SET_COUNT_FILMS);
 export const loadPromo = createAction<Film>(Action.data.LOAD_PROMO);
 export const loadFilms = createAction<Film[]>(Action.data.LOAD_FILMS);
 export const loadFilm = createAction<Film>(Action.data.LOAD_FILM);
+export const loadSimilarFilms = createAction<Film[]>(
+  Action.data.LOAD_SIMILAR_FILMS
+);
+export const loadComments = createAction<Comment[]>(Action.data.LOAD_COMMENTS);
 export const setFilmsDataLoadingStatus = createAction<boolean>(
   Action.data.SET_FILMS_DATA_LOADING_STATUS
 );
 export const setFilmDataLoadingStatus = createAction<boolean>(
   Action.data.SET_FILM_DATA_LOADING_STATUS
-);
-export const loadSimilarFilms = createAction<Film[]>(
-  Action.data.LOAD_SIMILAR_FILMS
 );
 
 export const requireAuthorization = createAction<AuthorizationStatus>(
