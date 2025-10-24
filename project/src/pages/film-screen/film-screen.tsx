@@ -12,13 +12,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
 import { AuthorizationStatus } from '../../const';
+import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 const FilmScreen = (): JSX.Element | null => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const film: Film | null = useAppSelector((state) => state.film);
-  const isFilmDataLoading: boolean = useAppSelector((state) => state.isFilmDataLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const film: Film | null = useAppSelector(getFilm);
+  const isFilmDataLoading: boolean = useAppSelector(getIsFilmLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     const { id } = params;

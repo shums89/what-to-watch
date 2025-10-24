@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
+import type { Comment } from '../../types/film';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Comment } from '../../types/film';
 import { fetchCommentsAction } from '../../store/api-actions';
 import { formatDate } from '../../utils';
+import { getComments } from '../../store/film-data/selectors';
 
 type FilmTabsReviewsProps = {
   id: number;
@@ -11,7 +12,7 @@ type FilmTabsReviewsProps = {
 
 const FilmTabsReviews = ({ id }: FilmTabsReviewsProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const comments: Comment[] = useAppSelector((state) => state.comments);
+  const comments: Comment[] = useAppSelector(getComments);
 
   useEffect(() => {
     dispatch(fetchCommentsAction(id));

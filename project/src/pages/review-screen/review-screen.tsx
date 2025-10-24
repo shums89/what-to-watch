@@ -2,20 +2,21 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
+import type { CommentAuth } from '../../types/film';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH } from '../../const';
 import RatingElement from '../../components/rating-element/rating-element';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { CommentAuth } from '../../types/film';
 import { postCommentAction } from '../../store/api-actions';
+import { getFilm } from '../../store/film-data/selectors';
 
 type formData = Omit<CommentAuth, 'id'>
 
 const ReviewScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.film);
+  const film = useAppSelector(getFilm);
   const [formData, setFormData] = useState<formData>({
     rating: 0,
     comment: '',

@@ -5,6 +5,7 @@ import type { Film } from '../../types/film';
 import FilmSmallCard from '../film-small-card/film-small-card';
 import { useAppSelector } from '../../hooks';
 import Spinner from '../../spinner/spinner';
+import { getIsFilmsLoading } from '../../store/film-data/selectors';
 
 type FilmsListProps = {
   films: Film[];
@@ -12,7 +13,7 @@ type FilmsListProps = {
 
 const FilmsList = ({ films }: FilmsListProps): JSX.Element => {
   const [activeId, setActiveId] = useState<number | null>(null);
-  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
+  const isFilmsDataLoading = useAppSelector(getIsFilmsLoading);
 
   if (isFilmsDataLoading) {
     return <Spinner />;

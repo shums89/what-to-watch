@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
 
 const HeaderUserBlock = (): JSX.Element => {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const avatarUrl = useAppSelector((state) => state.user?.avatarUrl);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const avatarUrl = useAppSelector(getUser)?.avatarUrl;
   const dispatch = useAppDispatch();
 
   if (authorizationStatus === AuthorizationStatus.Auth) {

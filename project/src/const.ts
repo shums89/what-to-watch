@@ -27,6 +27,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum StoreSlice {
+  FilmData = 'FILM_DATA',
+  FilmProcess = 'FILM_PROCESS',
+  UserProcess = 'USER_PROCESS',
+}
+
 export const months = [
   'January',
   'February',

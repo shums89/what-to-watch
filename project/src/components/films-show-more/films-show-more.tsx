@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks';
-import { setCountDisplayedFilms } from '../../store/action';
+import { setCountDisplayedFilms } from '../../store/film-process/film-process';
 
 const FilmsShowMore = (): JSX.Element => {
   const dispatch = useAppDispatch();

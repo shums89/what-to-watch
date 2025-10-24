@@ -5,6 +5,7 @@ import FilmsList from '../films-list/films-list';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchSimilarFilmsAction } from '../../store/api-actions';
+import { getSimilarFilms } from '../../store/film-data/selectors';
 
 type SimilarFilmsProps = {
   id: number;
@@ -12,7 +13,7 @@ type SimilarFilmsProps = {
 
 const SimilarFilms = ({ id }: SimilarFilmsProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const films: Film[] = useAppSelector((state) => state.similarFilms);
+  const films: Film[] = useAppSelector(getSimilarFilms);
 
   useEffect(() => {
     dispatch(fetchSimilarFilmsAction(id));

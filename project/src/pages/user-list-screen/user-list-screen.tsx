@@ -7,9 +7,10 @@ import HeaderUserBlock from '../../components/header-user-block/header-user-bloc
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../store/film-data/selectors';
 
 const UserListScreen = (): JSX.Element => {
-  const films: Film[] = useAppSelector((state) => state.films);
+  const films: Film[] = useAppSelector(getFilms);
   const userList = films.slice().filter((el) => el.isFavorite);
 
   return (
