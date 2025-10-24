@@ -27,3 +27,6 @@ export type Comment = {
   rating: number;
   user: Pick<UserData, 'id' | 'name'>;
 };
+
+export type CommentAuth = Pick<Comment, 'comment' | 'rating'> &
+  Pick<Film, 'id'>;

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError, AxiosInstance } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
-import type { Comment, Film } from '../types/film';
+import type { Comment, CommentAuth, Film } from '../types/film';
 import type { AppDispatch, State } from '../types/state';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import {
@@ -28,6 +28,7 @@ const Action = {
     FETCH_FILM: 'data/fetchFilm',
     FETCH_SIMILAR_FILM: 'data/fetchSimilarFilms',
     FETCH_COMMENTS: 'data/fetchComments',
+    POST_COMMENT: 'data/postComment',
   },
   user: {
     CHECK_AUTH: 'user/checkAuth',
@@ -112,6 +113,27 @@ export const fetchCommentsAction = createAsyncThunk<
   const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${id}`);
   dispatch(loadComments(data));
 });
+
+export const postCommentAction = createAsyncThunk<
+  void,
+  CommentAuth,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  Action.data.POST_COMMENT,
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    const { data } = await api.post<Comment[]>(`${APIRoute.Comments}/${id}`, {
+      comment,
+      rating,
+    });
+
+    dispatch(loadComments(data));
+    dispatch(redirectToRoute(`${APIRoute.Films}/${id}`));
+  }
+);
 
 export const checkAuthAction = createAsyncThunk<
   void,

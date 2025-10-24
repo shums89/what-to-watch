@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import type { Comment, Film } from '../types/film';
-import { AppRoute, AuthorizationStatus } from '../const';
+import type { Comment, CommentAuth, Film } from '../types/film';
+import { AuthorizationStatus } from '../const';
 import { UserData } from '../types/user-data';
 
 export const Action = {
@@ -15,6 +15,7 @@ export const Action = {
     LOAD_FILM: 'data/loadFilm',
     LOAD_SIMILAR_FILMS: 'data/loadSimilarFilms',
     LOAD_COMMENTS: 'data/loadComments',
+    POST_COMMENT: 'data/postComment',
     SET_FILMS_DATA_LOADING_STATUS: 'data/setFilmsDataLoadingStatus',
     SET_FILM_DATA_LOADING_STATUS: 'data/setFilmDataLoadingStatus',
   },
@@ -37,6 +38,7 @@ export const loadSimilarFilms = createAction<Film[]>(
   Action.data.LOAD_SIMILAR_FILMS
 );
 export const loadComments = createAction<Comment[]>(Action.data.LOAD_COMMENTS);
+export const postComment = createAction<CommentAuth>(Action.data.POST_COMMENT);
 export const setFilmsDataLoadingStatus = createAction<boolean>(
   Action.data.SET_FILMS_DATA_LOADING_STATUS
 );
@@ -49,6 +51,6 @@ export const requireAuthorization = createAction<AuthorizationStatus>(
 );
 export const loginUser = createAction<UserData>(Action.user.LOGIN_USER);
 
-export const redirectToRoute = createAction<AppRoute>(
+export const redirectToRoute = createAction<string>(
   Action.route.REDIRECT_TO_ROUTE
 );

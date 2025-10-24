@@ -1,45 +1,40 @@
 import { Helmet } from 'react-helmet-async';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
-
-import { Film } from '../../types/film';
 
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { AppRoute } from '../../const';
+import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH } from '../../const';
 import RatingElement from '../../components/rating-element/rating-element';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { CommentAuth } from '../../types/film';
+import { postCommentAction } from '../../store/api-actions';
 
-type formData = {
-  rating: number | null;
-  review: string | null;
-}
+type formData = Omit<CommentAuth, 'id'>
 
 const ReviewScreen = (): JSX.Element => {
-  const films: Film[] = useAppSelector((state) => state.films);
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.film);
   const [formData, setFormData] = useState<formData>({
-    rating: null,
-    review: null,
+    rating: 0,
+    comment: '',
   });
 
   const ratingChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, rating: +target.value });
-  const reviewChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, review: target.value });
+  const commentChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: target.value });
 
   const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-  };
 
-  const params = useParams();
-  const paramsId = params.id || 0;
-  const id: number = Number.isInteger(+paramsId) ? +paramsId : 0;
-  const film: Film = films.filter((el) => el.id === +id)[0];
+    dispatch(postCommentAction({ id, ...formData }));
+  };
 
   if (!film) {
     return <NotFoundScreen />;
   }
 
-  const { name, posterImage, backgroundImage, backgroundColor } = film;
+  const { id, name, posterImage, backgroundImage, backgroundColor } = film;
 
   return (
     <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
@@ -92,11 +87,17 @@ const ReviewScreen = (): JSX.Element => {
 
           <div className="add-review__text">
             <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
-              onChange={reviewChangeHandle}
+              onChange={commentChangeHandle}
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button
+                className="add-review__btn"
+                type="submit"
+                disabled={!formData.rating || (formData.comment.length < MIN_COMMENT_LENGTH || formData.comment.length > MAX_COMMENT_LENGTH)}
+              >
+                Post
+              </button>
             </div>
           </div>
         </form>
