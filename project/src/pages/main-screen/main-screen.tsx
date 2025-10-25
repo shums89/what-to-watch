@@ -8,13 +8,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenresList from '../../components/genres-list/genres-list';
 import FilmsShowMore from '../../components/films-show-more/films-show-more';
 import { fetchFilmsAction, fetchPromoAction } from '../../store/api-actions';
-import { getFilms, getPromo } from '../../store/film-data/selectors';
-import { getCount, getGenre } from '../../store/film-process/selectors';
+import { getPromo, selectFilms } from '../../store/film-data/selectors';
+import { getCount } from '../../store/film-process/selectors';
 
 const MainScreen = (): JSX.Element => {
   const promo = useAppSelector(getPromo);
-  const genre = useAppSelector(getGenre);
-  const films = useAppSelector(getFilms).filter((film) => film.genre === genre || genre === 'All genres');
+  const films = useAppSelector(selectFilms);
   const countFilms = useAppSelector(getCount);
   const isVisible: boolean = films.length > countFilms;
   const dispatch = useAppDispatch();

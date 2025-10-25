@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-import type { Film } from '../../types/film';
+import type { Comment, Film } from '../../types/film';
 
 import FilmTabsOverview from '../film-tabs-overview/film-tabs-overview';
 import FilmTabsDetails from '../film-tabs-details/film-tabs-details';
 import FilmTabsReviews from '../film-tabs-reviews/film-tabs-reviews';
+import { useAppSelector } from '../../hooks';
+import { getComments } from '../../store/film-data/selectors';
 
 type FilmTabsProps = {
   film: Film;
@@ -12,6 +14,7 @@ type FilmTabsProps = {
 
 const FilmTabs = ({ film }: FilmTabsProps): JSX.Element => {
   const [activeTab, setActiveTab] = useState('overview');
+  const comments: Comment[] = useAppSelector(getComments);
 
   const tabs = [
     { name: 'overview', title: 'Overview', },
@@ -23,7 +26,7 @@ const FilmTabs = ({ film }: FilmTabsProps): JSX.Element => {
     switch (activeTab) {
       case 'overview': return <FilmTabsOverview {...film} />;
       case 'details': return <FilmTabsDetails {...film} />;
-      case 'reviews': return <FilmTabsReviews id={film.id} />;
+      case 'reviews': return <FilmTabsReviews comments={comments} />;
     }
   };
 

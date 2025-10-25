@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 import classNames from 'classnames';
 
 import { AppRoute } from '../../const';
@@ -28,4 +29,4 @@ const Logo = ({ isLight }: LogoProps): JSX.Element => (
   </div>
 );
 
-export default Logo;
+export default memo(Logo);

@@ -9,7 +9,7 @@ import Logo from '../../components/logo/logo';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchFilmAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
 import { AuthorizationStatus } from '../../const';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
@@ -27,6 +27,7 @@ const FilmScreen = (): JSX.Element | null => {
     if (id) {
       const parsedId = Number(id);
       dispatch(fetchFilmAction(parsedId));
+      dispatch(fetchCommentsAction(parsedId));
     }
   }, [params, dispatch]);
 

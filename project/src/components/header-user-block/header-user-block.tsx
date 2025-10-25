@@ -4,6 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
+import { memo } from 'react';
 
 const HeaderUserBlock = (): JSX.Element => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -41,4 +42,4 @@ const HeaderUserBlock = (): JSX.Element => {
   );
 };
 
-export default HeaderUserBlock;
+export default memo(HeaderUserBlock);
