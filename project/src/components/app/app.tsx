@@ -35,7 +35,7 @@ const App = (): JSX.Element => (
               <Route path="review" element={<ReviewScreen />} />
             </Route>
           </Route>
-          <Route path={AppRoute.Player} element={<PlayerScreen />} />
+          <Route path={`${AppRoute.Player}/:id`} element={<PlayerScreen />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Route>
       </Routes>

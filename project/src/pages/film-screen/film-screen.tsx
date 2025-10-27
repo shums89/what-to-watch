@@ -11,7 +11,7 @@ import FilmTabs from '../../components/film-tabs/film-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction, fetchFilmAction } from '../../store/api-actions';
 import Spinner from '../../spinner/spinner';
-import { AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
@@ -35,7 +35,7 @@ const FilmScreen = (): JSX.Element | null => {
     return <Spinner />;
   }
 
-  const { name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
+  const { id, name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
 
   return (
     <>
@@ -66,12 +66,12 @@ const FilmScreen = (): JSX.Element | null => {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link to={`${AppRoute.Player}/${id}`} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
