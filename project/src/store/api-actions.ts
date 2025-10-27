@@ -9,6 +9,7 @@ import type { UserData } from '../types/user-data';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { redirectToRoute } from './action';
+import browserHistory from '../browser-history';
 
 const Action = {
   data: {
@@ -147,7 +148,7 @@ export const loginAction = createAsyncThunk<
   const { token } = data;
 
   saveToken(token);
-  dispatch(redirectToRoute(AppRoute.Root));
+  browserHistory.back();
 
   return data;
 });
