@@ -65,7 +65,6 @@ const VideoPlayer = ({ isPlaying, ...film }: VideoPlayerProps): JSX.Element => {
       loop
       muted
       ref={videoRef}
-      width="280"
       height="175"
     />
   );

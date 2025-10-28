@@ -17,15 +17,15 @@ const FilmSmallCard = ({ onMouseOver, onMouseOut, isActive, ...film }: FilmSmall
     onMouseOver={() => onMouseOver ? onMouseOver(film.id) : null}
     onMouseOut={() => onMouseOut ? onMouseOut() : null}
   >
-    <div className="small-film-card__image">
+    <Link to={`${AppRoute.Films}/${film.id}`} className="small-film-card__image">
       <VideoPlayer isPlaying={isActive || false} {...film} />
-    </div>
+    </Link>
     <h3 className="small-film-card__title">
       <Link to={`${AppRoute.Films}/${film.id}`} className="small-film-card__link">
         {film.name}
       </Link>
     </h3>
-  </article>
+  </article >
 );
 
 export default FilmSmallCard;
