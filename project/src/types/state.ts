@@ -10,6 +10,8 @@ export type FilmData = {
   film: Film | null;
   isFilmDataLoading: boolean;
   similarFilms: Film[];
+  favoriteFilms: Film[];
+  isFavoriteFilmsLoading: boolean;
   comments: Comment[];
 };
 

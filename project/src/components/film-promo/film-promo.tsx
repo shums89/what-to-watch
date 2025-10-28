@@ -4,13 +4,14 @@ import type { Film } from '../../types/film';
 import HeaderUserBlock from '../header-user-block/header-user-block';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../const';
+import FavoriteButton from '../favorite-button/favorite-button';
 
 type PromoProps = {
   promo: Film;
 }
 
 const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
-  const { id, name, posterImage, backgroundImage, genre, released } = promo;
+  const { id, name, posterImage, backgroundImage, genre, released, isFavorite } = promo;
 
   return (
     <section className="film-card">
@@ -46,12 +47,7 @@ const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
                 </svg>
                 <span>Play</span>
               </Link>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              <FavoriteButton id={id} isFavorite={isFavorite} />
             </div>
           </div>
         </div>

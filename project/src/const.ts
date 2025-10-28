@@ -19,6 +19,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
+  Similar = 'similar',
+  Favorite = '/favorite',
 }
 
 export enum AuthorizationStatus {

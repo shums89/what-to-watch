@@ -14,6 +14,7 @@ import Spinner from '../../spinner/spinner';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 
 const FilmScreen = (): JSX.Element | null => {
   const params = useParams();
@@ -35,7 +36,7 @@ const FilmScreen = (): JSX.Element | null => {
     return <Spinner />;
   }
 
-  const { id, name, posterImage, backgroundImage, backgroundColor, genre, released } = film;
+  const { id, name, posterImage, backgroundImage, backgroundColor, genre, released, isFavorite } = film;
 
   return (
     <>
@@ -72,12 +73,7 @@ const FilmScreen = (): JSX.Element | null => {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <FavoriteButton id={id} isFavorite={isFavorite} />
                 {authorizationStatus === AuthorizationStatus.Auth &&
                   (<Link to="review" className="btn film-card__button">Add review</Link>)}
               </div>

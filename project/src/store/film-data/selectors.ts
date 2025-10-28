@@ -14,6 +14,9 @@ export const getIsFilmLoading = (state: State): boolean => state[StoreSlice.Film
 
 export const getSimilarFilms = (state: State): Film[] => state[StoreSlice.FilmData].similarFilms;
 
+export const getFavoriteFilms = (state: State): Film[] | null => state[StoreSlice.FilmData].favoriteFilms;
+export const getIsFavoriteFilmsLoading = (state: State): boolean => state[StoreSlice.FilmData].isFavoriteFilmsLoading;
+
 export const getComments = (state: State): Comment[] => state[StoreSlice.FilmData].comments;
 
 export const selectFilms = createSelector([getFilms, getGenre], (films, genre) =>

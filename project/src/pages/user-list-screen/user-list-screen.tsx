@@ -1,17 +1,27 @@
 import { Helmet } from 'react-helmet-async';
-
-import type { Film } from '../../types/film';
+import { useEffect } from 'react';
 
 import Footer from '../../components/footer/footer';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../store/film-data/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFavoriteFilms, getIsFavoriteFilmsLoading } from '../../store/film-data/selectors';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
+import Spinner from '../../spinner/spinner';
 
 const UserListScreen = (): JSX.Element => {
-  const films: Film[] = useAppSelector(getFilms);
-  const userList = films.slice().filter((el) => el.isFavorite);
+  const dispatch = useAppDispatch();
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const isFavoriteFilmsDataLoading = useAppSelector(getIsFavoriteFilmsLoading);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, [dispatch]);
+
+  if (isFavoriteFilmsDataLoading || !favoriteFilms) {
+    return <Spinner />;
+  }
 
   return (
     <div className="user-page">
@@ -29,7 +39,7 @@ const UserListScreen = (): JSX.Element => {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList films={userList} />
+        <FilmsList films={favoriteFilms} />
       </section>
 
       <Footer />

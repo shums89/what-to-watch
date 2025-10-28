@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
 import type { AuthData } from '../types/auth-data';
-import type { Comment, CommentAuth, Film } from '../types/film';
+import type { Comment, CommentAuth, FavoriteAuth, Film } from '../types/film';
 import type { AppDispatch, State } from '../types/state';
 import type { UserData } from '../types/user-data';
 import { APIRoute, AppRoute } from '../const';
@@ -16,7 +16,9 @@ const Action = {
     FETCH_PROMO: 'data/fetchPromo',
     FETCH_FILMS: 'data/fetchFilms',
     FETCH_FILM: 'data/fetchFilm',
-    FETCH_SIMILAR_FILM: 'data/fetchSimilarFilms',
+    FETCH_SIMILAR_FILMS: 'data/fetchSimilarFilms',
+    FETCH_FAVORITE_FILMS: 'data/fetchFavoriteFilms',
+    POST_FAVORITE_STATUS: 'data/postFavoriteStatus',
     FETCH_COMMENTS: 'data/fetchComments',
     POST_COMMENT: 'data/postComment',
   },
@@ -84,8 +86,34 @@ export const fetchSimilarFilmsAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->(Action.data.FETCH_SIMILAR_FILM, async (id, { extra: api }) => {
-  const { data } = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
+>(Action.data.FETCH_SIMILAR_FILMS, async (id, { extra: api }) => {
+  const { data } = await api.get<Film[]>(`${APIRoute.Films}/${id}/${APIRoute.Similar}`);
+  return data;
+});
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<
+  Film[],
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.data.FETCH_FAVORITE_FILMS, async (_arg, { extra: api }) => {
+  const { data } = await api.get<Film[]>(APIRoute.Favorite);
+  return data;
+});
+
+export const postFavoriteStatusAction = createAsyncThunk<
+  Film,
+  FavoriteAuth,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(Action.data.POST_FAVORITE_STATUS, async ({ id, status }, { extra: api }) => {
+  const { data } = await api.post<Film>(`${APIRoute.Favorite}/${id}/${status}`);
   return data;
 });
 

@@ -28,5 +28,5 @@ export type Comment = {
   user: Pick<UserData, 'id' | 'name'>;
 };
 
-export type CommentAuth = Pick<Comment, 'comment' | 'rating'> &
-  Pick<Film, 'id'>;
+export type CommentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<Film, 'id'>;
+export type FavoriteAuth = Pick<Film, 'id'> & { status: 1 | 0 };

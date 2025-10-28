@@ -15,9 +15,9 @@ const HeaderUserBlock = (): JSX.Element => {
     return (
       <ul className="user-block">
         <li className="user-block__item">
-          <div className="user-block__avatar">
+          <Link to={AppRoute.UserList} className="user-block__avatar" type='button'>
             <img src={avatarUrl || 'img/avatar.jpg'} alt="User avatar" width="63" height="63" />
-          </div>
+          </Link>
         </li>
         <li className="user-block__item">
           <Link
