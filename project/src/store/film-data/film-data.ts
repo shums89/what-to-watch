@@ -40,7 +40,7 @@ export const filmData = createSlice({
         state.films = action.payload;
         state.isFilmsDataLoading = false;
       })
-      .addCase(fetchFilmAction.pending, (state, action) => {
+      .addCase(fetchFilmAction.pending, (state) => {
         state.isFilmDataLoading = true;
       })
       .addCase(fetchFilmAction.fulfilled, (state, action) => {

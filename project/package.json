@@ -1,7 +1,8 @@
 {
-  "name": "project",
+  "name": "what-to-watch",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^0.27.2",
