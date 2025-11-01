@@ -10,11 +10,11 @@ import SimilarFilms from '../../components/similar-films/similar-films';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction, fetchFilmAction } from '../../store/api-actions';
-import Spinner from '../../spinner/spinner';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
+import Spinner from '../../components/spinner/spinner';
 
 const FilmScreen = (): JSX.Element | null => {
   const params = useParams();

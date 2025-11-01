@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
-import Spinner from '../../spinner/spinner';
 import browserHistory from '../../browser-history';
+import Spinner from '../../components/spinner/spinner';
 
 export const formatTime = (totalSeconds: number) => {
   const seconds = totalSeconds % 60;

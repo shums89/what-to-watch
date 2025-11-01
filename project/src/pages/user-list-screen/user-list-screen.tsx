@@ -8,7 +8,7 @@ import FilmsList from '../../components/films-list/films-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavoriteFilms, getIsFavoriteFilmsLoading } from '../../store/film-data/selectors';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
-import Spinner from '../../spinner/spinner';
+import Spinner from '../../components/spinner/spinner';
 
 const UserListScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
