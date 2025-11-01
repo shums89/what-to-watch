@@ -25,17 +25,18 @@ const ReviewScreen = (): JSX.Element => {
   const ratingChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, rating: +target.value });
   const commentChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: target.value });
 
-  const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-
-    dispatch(postCommentAction({ id, ...formData }));
-  };
 
   if (!film) {
     return <NotFoundScreen />;
   }
 
   const { id, name, posterImage, backgroundImage, backgroundColor } = film;
+
+  const formSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    dispatch(postCommentAction({ id, ...formData }));
+  };
 
   return (
     <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
