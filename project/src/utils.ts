@@ -1,5 +1,3 @@
-import { Action } from 'redux';
-
 import { months } from './const';
 
 export const formatDate = (date: string) => {
@@ -15,5 +13,3 @@ export const formatTime = (totalSeconds: number) => {
 
   return `${hours > 0 ? `0${hours}:`.slice(-3) : ''}${`0${minutes}`.slice(-2)}:${`0${seconds}`.slice(-2)}`;
 };
-
-export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);

@@ -22,9 +22,9 @@ import {
   postFavoriteStatusAction,
 } from './api-actions';
 import { films } from '../mocks/films';
-import { extractActionsTypes } from '../utils';
 import { redirectToRoute } from './action';
 import * as tokenStorage from '../services/token';
+import { extractActionsTypes } from '../test-utils/mocks';
 
 describe('Async actions', () => {
   const axios = createAPI();
