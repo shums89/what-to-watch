@@ -7,14 +7,7 @@ import { fetchFilmAction } from '../../store/api-actions';
 import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
 import browserHistory from '../../browser-history';
 import Spinner from '../../components/spinner/spinner';
-
-export const formatTime = (totalSeconds: number) => {
-  const seconds = totalSeconds % 60;
-  const minutes = Math.floor(totalSeconds / 60);
-  const hours = Math.floor((totalSeconds / 60) % 24);
-
-  return `${hours > 0 ? `0${hours}:`.slice(-3) : ''}${`0${minutes}`.slice(-2)}:${`0${seconds}`.slice(-2)}`;
-};
+import { formatTime } from '../../utils';
 
 const PlayerScreen = (): JSX.Element => {
   const [isLoaded, setIsLoaded] = useState(false);

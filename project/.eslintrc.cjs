@@ -34,7 +34,8 @@ module.exports = {
         '*test*'
       ],
       rules: {
-        '@typescript-eslint/unbound-method': 'off'
+        '@typescript-eslint/unbound-method': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off'
       }
     }
   ]
