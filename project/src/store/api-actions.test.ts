@@ -1,10 +1,12 @@
 import type { Action } from 'redux';
-import type { State } from '../types/state';
-
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 
+import type { Comment, CommentAuth, FavoriteAuth, Film } from '../types/film';
+import type { UserData } from '../types/user-data';
+import type { AuthData } from '../types/auth-data';
+import type { State } from '../types/state';
 import { APIRoute } from '../const';
 import { createAPI } from '../services/api';
 import {
@@ -21,10 +23,7 @@ import {
 } from './api-actions';
 import { films } from '../mocks/films';
 import { extractActionsTypes } from '../utils';
-import { Comment, CommentAuth, FavoriteAuth, Film } from '../types/film';
-import { UserData } from '../types/user-data';
 import { redirectToRoute } from './action';
-import { AuthData } from '../types/auth-data';
 import * as tokenStorage from '../services/token';
 
 describe('Async actions', () => {
