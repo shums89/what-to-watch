@@ -7,7 +7,7 @@ import HeaderUserBlock from '../../components/header-user-block/header-user-bloc
 import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH } from '../../const';
-import RatingElement from '../../components/rating-element/rating-element';
+import Rating from '../../components/rating/rating';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postCommentAction } from '../../store/api-actions';
 import { getFilm } from '../../store/film-data/selectors';
@@ -22,8 +22,10 @@ const ReviewScreen = (): JSX.Element => {
     comment: '',
   });
 
-  const ratingChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, rating: +target.value });
-  const commentChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: target.value });
+  const ratingChangeHandle =
+    ({ target }: ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, rating: +target.value });
+  const commentChangeHandle =
+    ({ target }: ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, comment: target.value });
 
 
   if (!film) {
@@ -77,16 +79,7 @@ const ReviewScreen = (): JSX.Element => {
           action="#" className="add-review__form"
           onSubmit={formSubmitHandle}
         >
-          <div className="rating">
-            <div className="rating__stars" onChange={ratingChangeHandle}>
-              {Array.from({ length: 10 }, (_, i) => i + 1)
-                .sort((a, b) => b - a)
-                .map((i) => (
-                  <RatingElement key={i} rating={i} />
-                ))}
-            </div>
-          </div>
-
+          <Rating onChange={ratingChangeHandle} />
           <div className="add-review__text">
             <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
               onChange={commentChangeHandle}
