@@ -12,13 +12,12 @@ describe('Component: AuthScreen', () => {
   const preparedComponent = withHistory(withStoreComponent);
 
   it('should render correctly', () => {
-    const expectedText = 'Sign in';
     const expectedLoginPlaceholderText = 'Email address';
     const expectedPasswordPlaceholderText = 'Password';
 
     render(preparedComponent);
 
-    expect(screen.getAllByText(expectedText)).not.toBeNull();
+    expect(screen.getByRole('heading')).toHaveTextContent('Sign in');
     expect(screen.getByPlaceholderText(expectedLoginPlaceholderText)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(expectedPasswordPlaceholderText)).toBeInTheDocument();
     expect(screen.getByText('Component Logo')).toBeInTheDocument();

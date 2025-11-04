@@ -17,6 +17,7 @@ describe('Component: UserListScreen', () => {
 
     render(preparedComponent);
 
+    expect(screen.getByTestId('user-list-screen')).toBeInTheDocument();
     expect(screen.getByText(/My list/i)).toBeInTheDocument();
     expect(screen.getByText('Component Logo')).toBeInTheDocument();
     expect(screen.getByText('Component HeaderUserBlock')).toBeInTheDocument();

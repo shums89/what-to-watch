@@ -23,6 +23,7 @@ const NotFoundScreen = (): JSX.Element => (
         gap: '30px',
         flexGrow: '1',
       }}
+      data-testid="not-found-screen"
     >
       <h1 className='page-title'>404. Page not found</h1>
       <Link to={AppRoute.Root} style={{ color: '#d9cd8d' }}>Вернуться на главную</Link>

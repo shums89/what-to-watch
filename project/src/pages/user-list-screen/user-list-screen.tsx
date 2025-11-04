@@ -24,7 +24,7 @@ const UserListScreen = (): JSX.Element => {
   }
 
   return (
-    <div className="user-page" data-testid="review-screen">
+    <div className="user-page" data-testid="user-list-screen">
       <Helmet>
         <title>WTW. My list</title>
       </Helmet>

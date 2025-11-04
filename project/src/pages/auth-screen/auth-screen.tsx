@@ -24,14 +24,14 @@ const AuthScreen = (): JSX.Element => {
   };
 
   return (
-    <div className="user-page">
+    <div className="user-page" data-testid="auth-screen">
       <Helmet>
         <title>WTW. Auth</title>
       </Helmet>
       <header className="page-header user-page__head">
         <Logo />
 
-        <h1 className="page-title user-page__title" data-testid="title">Sign in</h1>
+        <h1 className="page-title user-page__title">Sign in</h1>
       </header>
 
       <div className="sign-in user-page__content">

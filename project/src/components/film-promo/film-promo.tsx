@@ -14,7 +14,7 @@ const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
   const { id, name, posterImage, backgroundImage, genre, released, isFavorite } = promo;
 
   return (
-    <section className="film-card">
+    <section className="film-card" data-testid="promo">
       <div className="film-card__bg">
         <img src={backgroundImage} alt={name} data-testid="background-image" />
       </div>

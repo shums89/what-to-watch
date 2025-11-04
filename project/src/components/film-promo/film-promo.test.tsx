@@ -18,6 +18,7 @@ describe('Component: FilmPromo', () => {
 
     render(preparedComponent);
 
+    expect(screen.getByTestId('promo')).toBeInTheDocument();
     expect(screen.getByText(name)).toBeInTheDocument();
     expect(screen.getByText(genre)).toBeInTheDocument();
     expect(screen.getByText(released)).toBeInTheDocument();

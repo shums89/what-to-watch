@@ -13,6 +13,7 @@ describe('Component: NotFoundScreen', () => {
 
     render(withHistory(<NotFoundScreen />));
 
+    expect(screen.getByTestId('not-found-screen')).toBeInTheDocument();
     expect(screen.getByText(expectedHeaderText)).toBeInTheDocument();
     expect(screen.getByText(expectedLinkText)).toBeInTheDocument();
     expect(screen.getByText('Component Logo')).toBeInTheDocument();

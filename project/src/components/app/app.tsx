@@ -10,36 +10,32 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import ReviewScreen from '../../pages/review-screen/review-screen';
 import PrivateRoute from '../private-route/private-route';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
 
 const App = (): JSX.Element => (
   <HelmetProvider>
-    <HistoryRouter history={browserHistory} >
-      <Routes>
-        <Route path={AppRoute.Root}>
-          <Route index element={<MainScreen />} />
-          <Route path={AppRoute.Login} element={<AuthScreen />} />
-          <Route
-            path={AppRoute.UserList}
-            element={
-              <PrivateRoute>
-                <UserListScreen />
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoute.Films}>
-            <Route index element={<NotFoundScreen />} />
-            <Route path=":id">
-              <Route index element={<FilmScreen />} />
-              <Route path="review" element={<ReviewScreen />} />
-            </Route>
+    <Routes>
+      <Route path={AppRoute.Root}>
+        <Route index element={<MainScreen />} />
+        <Route path={AppRoute.Login} element={<AuthScreen />} />
+        <Route
+          path={AppRoute.UserList}
+          element={
+            <PrivateRoute>
+              <UserListScreen />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.Films}>
+          <Route index element={<NotFoundScreen />} />
+          <Route path=":id">
+            <Route index element={<FilmScreen />} />
+            <Route path="review" element={<ReviewScreen />} />
           </Route>
-          <Route path={`${AppRoute.Player}/:id`} element={<PlayerScreen />} />
-          <Route path="*" element={<NotFoundScreen />} />
         </Route>
-      </Routes>
-    </HistoryRouter>
+        <Route path={`${AppRoute.Player}/:id`} element={<PlayerScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
+      </Route>
+    </Routes>
   </HelmetProvider>
 );
 
