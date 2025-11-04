@@ -41,6 +41,13 @@ export enum StoreSlice {
   UserProcess = 'USER_PROCESS',
 }
 
+export enum SubmitStatus {
+  Still = 'STILL',
+  Pending = 'PENDING',
+  Fullfilled = 'FULLFILLED',
+  Rejected = 'REJECTED',
+}
+
 export const months = [
   'January',
   'February',

@@ -1,6 +1,6 @@
 import type { Comment, Film } from '../../types/film';
 import type { State } from '../../types/state';
-import { StoreSlice } from '../../const';
+import { StoreSlice, SubmitStatus } from '../../const';
 import { createSelector } from '@reduxjs/toolkit';
 import { getGenre } from '../film-process/selectors';
 
@@ -18,6 +18,7 @@ export const getFavoriteFilms = (state: State): Film[] | null => state[StoreSlic
 export const getIsFavoriteFilmsLoading = (state: State): boolean => state[StoreSlice.FilmData].isFavoriteFilmsLoading;
 
 export const getComments = (state: State): Comment[] => state[StoreSlice.FilmData].comments;
+export const getCommentStatus = (state: State): SubmitStatus => state[StoreSlice.FilmData].commentStatus;
 
 export const selectFilms = createSelector([getFilms, getGenre], (films, genre) =>
   films.filter((film) => film.genre === genre || genre === 'All genres')

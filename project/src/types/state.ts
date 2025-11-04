@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, SubmitStatus } from '../const';
 import store from '../store';
 import { Comment, Film } from './film';
 import { UserData } from './user-data';
@@ -13,6 +13,7 @@ export type FilmData = {
   favoriteFilms: Film[];
   isFavoriteFilmsLoading: boolean;
   comments: Comment[];
+  commentStatus: SubmitStatus;
 };
 
 export type FilmProcess = {

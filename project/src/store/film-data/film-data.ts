@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { FilmData } from '../../types/state';
-import { StoreSlice } from '../../const';
+import { StoreSlice, SubmitStatus } from '../../const';
 import {
   fetchCommentsAction,
   fetchFavoriteFilmsAction,
@@ -9,6 +9,7 @@ import {
   fetchFilmsAction,
   fetchPromoAction,
   fetchSimilarFilmsAction,
+  postCommentAction,
   postFavoriteStatusAction,
 } from '../api-actions';
 
@@ -22,6 +23,7 @@ const initialState: FilmData = {
   favoriteFilms: [],
   isFavoriteFilmsLoading: false,
   comments: [],
+  commentStatus: SubmitStatus.Still,
 };
 
 export const filmData = createSlice({
@@ -72,6 +74,16 @@ export const filmData = createSlice({
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
+      })
+      .addCase(postCommentAction.pending, (state) => {
+        state.commentStatus = SubmitStatus.Pending;
+      })
+      .addCase(postCommentAction.fulfilled, (state, action) => {
+        state.comments = action.payload;
+        state.commentStatus = SubmitStatus.Fullfilled;
+      })
+      .addCase(postCommentAction.rejected, (state) => {
+        state.commentStatus = SubmitStatus.Rejected;
       });
   },
 });

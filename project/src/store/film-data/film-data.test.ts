@@ -9,9 +9,11 @@ import {
   fetchFilmsAction,
   fetchPromoAction,
   fetchSimilarFilmsAction,
+  postCommentAction,
   postFavoriteStatusAction,
 } from '../api-actions';
 import { filmData } from './film-data';
+import { SubmitStatus } from '../../const';
 
 const film: Film = fakeFilms[1];
 const films: Film[] = fakeFilms;
@@ -25,6 +27,7 @@ const initialState: FilmData = {
   favoriteFilms: [],
   isFavoriteFilmsLoading: false,
   comments: [],
+  commentStatus: SubmitStatus.Still,
 };
 
 describe('Reducer: filmData', () => {
@@ -126,6 +129,40 @@ describe('Reducer: filmData', () => {
     expect(filmData.reducer(undefined, { type: fetchCommentsAction.fulfilled, payload: comments })).toEqual({
       ...initialState,
       comments,
+    });
+  });
+
+  it('should post comment', () => {
+    const user: Omit<UserData, 'token'> = {
+      id: 1,
+      name: 'Peter',
+      email: 'peter@gmail.com',
+      avatarUrl: 'img/user-1.jpg',
+    };
+    const comments: Comment[] = [
+      {
+        id: 1,
+        user,
+        rating: 2.1,
+        comment: 'This is great!',
+        date: '2025-10-16T13:16:51.359Z',
+      },
+    ];
+
+    expect(filmData.reducer(undefined, { type: postCommentAction.pending })).toEqual({
+      ...initialState,
+      commentStatus: SubmitStatus.Pending,
+    });
+
+    expect(filmData.reducer(undefined, { type: postCommentAction.fulfilled, payload: comments })).toEqual({
+      ...initialState,
+      comments,
+      commentStatus: SubmitStatus.Fullfilled,
+    });
+
+    expect(filmData.reducer(undefined, { type: postCommentAction.rejected })).toEqual({
+      ...initialState,
+      commentStatus: SubmitStatus.Rejected,
     });
   });
 });

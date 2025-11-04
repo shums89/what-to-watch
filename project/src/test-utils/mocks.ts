@@ -2,7 +2,7 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { Action } from 'redux';
 import { FilmData, State } from '../types/state';
 import { createAPI } from '../services/api';
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, SubmitStatus } from '../const';
 import { films } from '../mocks/films';
 import { UserData } from '../types/user-data';
 import { Comment } from '../types/film';
@@ -37,6 +37,7 @@ export const fakeFilmData: FilmData = {
   favoriteFilms: films.filter((item) => item.isFavorite),
   isFavoriteFilmsLoading: false,
   comments,
+  commentStatus: SubmitStatus.Still,
 };
 
 export const makeFakeStore = (initialState?: Partial<State>): State => ({
