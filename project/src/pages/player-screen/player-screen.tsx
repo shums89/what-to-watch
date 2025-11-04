@@ -8,6 +8,7 @@ import { getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
 import browserHistory from '../../browser-history';
 import Spinner from '../../components/spinner/spinner';
 import { formatTime } from '../../utils';
+import { useElementListener } from '../../hooks/use-element-listener';
 
 const PlayerScreen = (): JSX.Element => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,19 +48,7 @@ const PlayerScreen = (): JSX.Element => {
     }
   }, [params, dispatch]);
 
-  useEffect(() => {
-    const playerElement = videoRef.current;
-
-    if (!playerElement) {
-      return;
-    }
-
-    playerElement.addEventListener('loadeddata', handleDataLoaded);
-
-    return () => {
-      playerElement.removeEventListener('loadeddata', handleDataLoaded);
-    };
-  }, []);
+  useElementListener('loadeddata', videoRef, handleDataLoaded);
 
   useEffect(() => {
     const playerElement = videoRef.current;

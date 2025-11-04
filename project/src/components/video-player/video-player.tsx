@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 import type { Film } from '../../types/film';
+import { useElementListener } from '../../hooks/use-element-listener';
 
 type VideoPlayerProps = Film & {
   isPlaying: boolean;
@@ -16,19 +17,7 @@ const VideoPlayer = ({ isPlaying, ...film }: VideoPlayerProps): JSX.Element => {
     setIsLoaded(true);
   };
 
-  useEffect(() => {
-    const playerElement = videoRef.current;
-
-    if (!playerElement) {
-      return;
-    }
-
-    playerElement.addEventListener('loadeddata', handleDataLoaded);
-
-    return () => {
-      playerElement.removeEventListener('loadeddata', handleDataLoaded);
-    };
-  }, []);
+  useElementListener('loadeddata', videoRef, handleDataLoaded);
 
   useEffect(() => {
     const playerElement = videoRef.current;
