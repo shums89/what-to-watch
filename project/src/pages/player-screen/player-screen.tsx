@@ -96,10 +96,11 @@ const PlayerScreen = (): JSX.Element => {
   const { videoLink, previewImage, name } = film;
 
   return (
-    <div className="player">
+    <div className="player" data-testid="player">
       <Helmet>
         <title>WTW. {name}</title>
       </Helmet>
+
       <video
         className="player__video"
         autoPlay
@@ -107,6 +108,7 @@ const PlayerScreen = (): JSX.Element => {
         poster={previewImage}
         muted={false}
         ref={videoRef}
+        data-testid="video"
       />
 
       <button type="button" className="player__exit" onClick={() => browserHistory.back()}>Exit</button>
@@ -134,7 +136,7 @@ const PlayerScreen = (): JSX.Element => {
                   <span>Play</span>
                 </>)}
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{name}</div>
           <button type="button" className="player__full-screen" onClick={() => setIsFullscreen(!isFullscreen)}>
             <svg viewBox="0 0 27 27" width="27" height="27"><use xlinkHref="#full-screen"></use></svg>
             <span>Full screen</span>

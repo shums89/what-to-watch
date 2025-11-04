@@ -16,6 +16,7 @@ const Genre = ({ name, isActive, onClick }: GenreProps): JSX.Element => {
     <li
       className={`catalog__genres-item ${isActive ? 'catalog__genres-item--active' : ''}`}
       onClick={handleItemClick}
+      data-testid="catalog-genres-item"
     >
       <a href='#' className="catalog__genres-link" >{name}</a>
     </li>

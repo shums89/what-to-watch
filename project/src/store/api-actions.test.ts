@@ -1,5 +1,5 @@
 import type { Action } from 'redux';
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 
@@ -24,18 +24,14 @@ import {
 import { films } from '../mocks/films';
 import { redirectToRoute } from './action';
 import * as tokenStorage from '../services/token';
-import { extractActionsTypes } from '../test-utils/mocks';
+import { AppThunkDispatch, extractActionsTypes } from '../test-utils/mocks';
 
 describe('Async actions', () => {
   const axios = createAPI();
   const mockAxiosAdapter = new MockAdapter(axios);
   const middleware = [thunk.withExtraArgument(axios)];
 
-  const mockStoreCreator = configureMockStore<
-    State,
-    Action<string>,
-    ThunkDispatch<State, ReturnType<typeof createAPI>, Action>
-  >(middleware);
+  const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
 
   let store: ReturnType<typeof mockStoreCreator>;
 

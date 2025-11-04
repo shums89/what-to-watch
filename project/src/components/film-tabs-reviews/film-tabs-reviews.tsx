@@ -9,7 +9,7 @@ const FilmTabsReviews = ({ comments }: FilmTabsReviewsProps): JSX.Element => (
   <div className="film-card__reviews film-card__row">
     <div className="film-card__reviews-col">
       {comments && comments.map((comment) => (
-        <div className="review" key={comment.id}>
+        <div className="review" key={comment.id} data-testid="review">
           <blockquote className="review__quote">
             <p className="review__text">{comment.comment}</p>
             <footer className="review__details">

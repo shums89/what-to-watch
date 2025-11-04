@@ -21,7 +21,7 @@ const GenresList = (): JSX.Element => {
   }, [dispatch]);
 
   return (
-    <ul className="catalog__genres-list">
+    <ul className="catalog__genres-list" data-testid="catalog-genres-list">
       {genres.map((genre) => (
         <Genre key={genre} name={genre} isActive={genre === activeGenre} onClick={handleGenreClick} />
       ))}

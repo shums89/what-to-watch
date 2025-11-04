@@ -44,10 +44,10 @@ const FilmScreen = (): JSX.Element | null => {
         <title>WTW. {name}</title>
       </Helmet>
 
-      <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
+      <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }} data-testid="film-screen">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={backgroundImage} alt={name} />
+            <img src={backgroundImage} alt={name} data-testid="background-image" />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -84,7 +84,7 @@ const FilmScreen = (): JSX.Element | null => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" data-testid="poster" />
             </div>
 
             <FilmTabs film={film} />

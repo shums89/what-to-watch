@@ -13,7 +13,7 @@ type FilmSmallCardProps = Film & {
 
 const FilmSmallCard = ({ onMouseOver, onMouseOut, isActive, ...film }: FilmSmallCardProps): JSX.Element => (
   <article
-    className="small-film-card catalog__films-card"
+    className="small-film-card catalog__films-card" data-testid="film-small-card"
     onMouseOver={() => onMouseOver ? onMouseOver(film.id) : null}
     onMouseOut={() => onMouseOut ? onMouseOut() : null}
   >

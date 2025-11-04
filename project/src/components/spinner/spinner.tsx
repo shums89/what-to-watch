@@ -1,3 +1,3 @@
-const Spinner = (): JSX.Element => <div>Загрузка...</div>;
+const Spinner = (): JSX.Element => <div>Loading...</div>;
 
 export default Spinner;

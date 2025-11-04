@@ -12,7 +12,7 @@ const FilmsList = ({ films }: FilmsListProps): JSX.Element => {
   const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
-    <div className="catalog__films-list">
+    <div className="catalog__films-list" data-testid="catalog-films-list">
       {films.map((film) => (
         <FilmSmallCard
           key={film.id}

@@ -35,7 +35,8 @@ module.exports = {
       ],
       rules: {
         '@typescript-eslint/unbound-method': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off'
+        '@typescript-eslint/no-unsafe-call': 'off',
+        'react/display-name': 'off',
       }
     }
   ]

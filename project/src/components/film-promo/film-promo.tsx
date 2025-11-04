@@ -16,7 +16,7 @@ const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={backgroundImage} alt={name} />
+        <img src={backgroundImage} alt={name} data-testid="background-image" />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -30,7 +30,7 @@ const FilmPromo = ({ promo }: PromoProps): JSX.Element => {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={posterImage} alt="{name} poster" width="218" height="327" />
+            <img src={posterImage} alt="{name} poster" width="218" height="327" data-testid="poster" />
           </div>
 
           <div className="film-card__desc">

@@ -14,6 +14,7 @@ const Logo = ({ isLight }: LogoProps): JSX.Element => (
     style={
       window.location.pathname === AppRoute.Root ? { pointerEvents: 'none' } : {}
     }
+    data-testid="logo"
   >
     <Link
       to={AppRoute.Root}
@@ -21,6 +22,7 @@ const Logo = ({ isLight }: LogoProps): JSX.Element => (
         'logo__link',
         { 'logo__link--light': isLight },
       )}
+      data-testid="logo-link"
     >
       <span className="logo__letter logo__letter--1">W</span>
       <span className="logo__letter logo__letter--2">T</span>

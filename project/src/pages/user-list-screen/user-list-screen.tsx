@@ -13,21 +13,22 @@ import Spinner from '../../components/spinner/spinner';
 const UserListScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const favoriteFilms = useAppSelector(getFavoriteFilms);
-  const isFavoriteFilmsDataLoading = useAppSelector(getIsFavoriteFilmsLoading);
+  const isFavoriteFilmsLoading = useAppSelector(getIsFavoriteFilmsLoading);
 
   useEffect(() => {
     dispatch(fetchFavoriteFilmsAction());
   }, [dispatch]);
 
-  if (isFavoriteFilmsDataLoading || !favoriteFilms) {
+  if (isFavoriteFilmsLoading || !favoriteFilms) {
     return <Spinner />;
   }
 
   return (
-    <div className="user-page">
+    <div className="user-page" data-testid="review-screen">
       <Helmet>
         <title>WTW. My list</title>
       </Helmet>
+
       <header className="page-header user-page__head">
         <Logo />
 

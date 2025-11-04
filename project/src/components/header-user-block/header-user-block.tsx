@@ -13,9 +13,9 @@ const HeaderUserBlock = (): JSX.Element => {
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
-      <ul className="user-block">
+      <ul className="user-block" data-testid="user-block-auth">
         <li className="user-block__item">
-          <Link to={AppRoute.UserList} className="user-block__avatar" type='button'>
+          <Link to={AppRoute.UserList} className="user-block__avatar" type='button' data-testid="user-block-avatar">
             <img src={avatarUrl || 'img/avatar.jpg'} alt="User avatar" width="63" height="63" />
           </Link>
         </li>
@@ -36,7 +36,7 @@ const HeaderUserBlock = (): JSX.Element => {
   }
 
   return (
-    <div className="user-block">
+    <div className="user-block" data-testid="user-block-no-auth">
       <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
     </div>
   );

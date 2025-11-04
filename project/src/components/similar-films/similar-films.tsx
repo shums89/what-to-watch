@@ -1,14 +1,14 @@
-import type { Film } from '../../types/film';
+import { useEffect } from 'react';
 
+import type { Film } from '../../types/film';
 import Footer from '../footer/footer';
 import FilmsList from '../films-list/films-list';
-import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchSimilarFilmsAction } from '../../store/api-actions';
 import { getSimilarFilms } from '../../store/film-data/selectors';
 
 type SimilarFilmsProps = {
-  id: number;
+  id: Film['id'];
 };
 
 const SimilarFilms = ({ id }: SimilarFilmsProps): JSX.Element => {

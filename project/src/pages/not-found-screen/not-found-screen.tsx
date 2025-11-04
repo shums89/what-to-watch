@@ -10,6 +10,7 @@ const NotFoundScreen = (): JSX.Element => (
     <Helmet>
       <title>WTW. Page not found</title>
     </Helmet>
+
     <header className="page-header user-page__head">
       <Logo />
     </header>

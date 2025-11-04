@@ -24,7 +24,7 @@ const FilmsCatalog = (): JSX.Element => {
   }
 
   return (
-    <section className="catalog">
+    <section className="catalog" data-testid="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
       <GenresList />
@@ -33,7 +33,9 @@ const FilmsCatalog = (): JSX.Element => {
 
       {isVisibleButton && (
         <div className="catalog__more">
-          <button className="catalog__button" type="button" onClick={handleShowMoreClick}>Show more</button>
+          <button className="catalog__button" type="button" onClick={handleShowMoreClick} data-testid="button-show-more">
+            Show more
+          </button>
         </div>
       )}
     </section>

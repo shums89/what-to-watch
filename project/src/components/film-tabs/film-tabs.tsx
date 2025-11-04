@@ -38,12 +38,14 @@ const FilmTabs = ({ film }: FilmTabsProps): JSX.Element => {
             <li
               key={item.name}
               className={`film-nav__item ${item.name === activeTab ? 'film-nav__item--active' : ''}`}
+              data-testid={`item-tab-${item.name}`}
             >
               <button
                 key={item.name}
                 className={'film-nav__link'}
                 onClick={() => setActiveTab(item.name)}
                 style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
+                data-testid={`button-tab-${item.name}`}
               >
                 {item.title}
               </button>

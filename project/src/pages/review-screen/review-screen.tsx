@@ -41,13 +41,14 @@ const ReviewScreen = (): JSX.Element => {
   };
 
   return (
-    <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }}>
+    <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }} data-testid="review-screen">
       <Helmet>
         <title>WTW. Review</title>
       </Helmet>
+
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={backgroundImage} alt={name} />
+          <img src={backgroundImage} alt={name} data-testid="background-image" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -70,7 +71,7 @@ const ReviewScreen = (): JSX.Element => {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
+          <img src={posterImage} alt={`${name} poster`} width="218" height="327" data-testid="poster" />
         </div>
       </div>
 
