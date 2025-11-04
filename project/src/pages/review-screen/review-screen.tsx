@@ -41,65 +41,67 @@ const ReviewScreen = (): JSX.Element => {
   };
 
   return (
-    <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }} data-testid="review-screen">
+    <>
       <Helmet>
         <title>WTW. Review</title>
       </Helmet>
 
-      <div className="film-card__header">
-        <div className="film-card__bg">
-          <img src={backgroundImage} alt={name} data-testid="background-image" />
-        </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header">
-          <Logo />
-
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.Films}/${id}`} className="breadcrumbs__link">{name}</Link>
-              </li>
-              <li className="breadcrumbs__item">
-                <span className="breadcrumbs__link">Add review</span>
-              </li>
-            </ul>
-          </nav>
-
-          <HeaderUserBlock />
-        </header>
-
-        <div className="film-card__poster film-card__poster--small">
-          <img src={posterImage} alt={`${name} poster`} width="218" height="327" data-testid="poster" />
-        </div>
-      </div>
-
-      <div className="add-review">
-        <form
-          action="#" className="add-review__form"
-          onSubmit={formSubmitHandle}
-        >
-          <Rating onChange={ratingChangeHandle} />
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
-              onChange={commentChangeHandle}
-            >
-            </textarea>
-            <div className="add-review__submit">
-              <button
-                className="add-review__btn"
-                type="submit"
-                disabled={!formData.rating || (formData.comment.length < MIN_COMMENT_LENGTH || formData.comment.length > MAX_COMMENT_LENGTH)}
-              >
-                Post
-              </button>
-            </div>
+      <section className="film-card film-card--full" style={{ backgroundColor: backgroundColor }} data-testid="review-screen">
+        <div className="film-card__header">
+          <div className="film-card__bg">
+            <img src={backgroundImage} alt={name} data-testid="background-image" />
           </div>
-        </form>
-      </div>
 
-    </section>
+          <h1 className="visually-hidden">WTW</h1>
+
+          <header className="page-header">
+            <Logo />
+
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to={`${AppRoute.Films}/${id}`} className="breadcrumbs__link">{name}</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <span className="breadcrumbs__link">Add review</span>
+                </li>
+              </ul>
+            </nav>
+
+            <HeaderUserBlock />
+          </header>
+
+          <div className="film-card__poster film-card__poster--small">
+            <img src={posterImage} alt={`${name} poster`} width="218" height="327" data-testid="poster" />
+          </div>
+        </div>
+
+        <div className="add-review">
+          <form
+            action="#" className="add-review__form"
+            onSubmit={formSubmitHandle}
+          >
+            <Rating onChange={ratingChangeHandle} />
+            <div className="add-review__text">
+              <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+                onChange={commentChangeHandle}
+              >
+              </textarea>
+              <div className="add-review__submit">
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  disabled={!formData.rating || (formData.comment.length < MIN_COMMENT_LENGTH || formData.comment.length > MAX_COMMENT_LENGTH)}
+                >
+                  Post
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </section>
+    </>
   );
 };
 

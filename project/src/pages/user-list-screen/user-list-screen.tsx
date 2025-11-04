@@ -24,27 +24,29 @@ const UserListScreen = (): JSX.Element => {
   }
 
   return (
-    <div className="user-page" data-testid="user-list-screen">
+    <>
       <Helmet>
         <title>WTW. My list</title>
       </Helmet>
 
-      <header className="page-header user-page__head">
-        <Logo />
+      <div className="user-page" data-testid="user-list-screen">
+        <header className="page-header user-page__head">
+          <Logo />
 
-        <h1 className="page-title user-page__title">My list</h1>
+          <h1 className="page-title user-page__title">My list</h1>
 
-        <HeaderUserBlock />
-      </header>
+          <HeaderUserBlock />
+        </header>
 
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList films={favoriteFilms} />
-      </section>
+          <FilmsList films={favoriteFilms} />
+        </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 

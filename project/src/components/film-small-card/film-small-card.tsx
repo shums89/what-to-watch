@@ -6,7 +6,7 @@ import { AppRoute } from '../../const';
 import VideoPlayer from '../video-player/video-player';
 
 type FilmSmallCardProps = Film & {
-  onMouseOver?: (id: number) => void;
+  onMouseOver?: (id: Film['id']) => void;
   onMouseOut?: () => void;
   isActive?: boolean;
 }

@@ -24,44 +24,47 @@ const AuthScreen = (): JSX.Element => {
   };
 
   return (
-    <div className="user-page" data-testid="auth-screen">
+    <>
       <Helmet>
         <title>WTW. Auth</title>
       </Helmet>
-      <header className="page-header user-page__head">
-        <Logo />
 
-        <h1 className="page-title user-page__title">Sign in</h1>
-      </header>
+      <div className="user-page" data-testid="auth-screen">
+        <header className="page-header user-page__head">
+          <Logo />
 
-      <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
-          <div className="sign-in__fields">
-            <div className="sign-in__field">
-              <input
-                ref={loginRef}
-                className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"
-                data-testid="login"
-              />
-              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
+          <h1 className="page-title user-page__title">Sign in</h1>
+        </header>
+
+        <div className="sign-in user-page__content">
+          <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+            <div className="sign-in__fields">
+              <div className="sign-in__field">
+                <input
+                  ref={loginRef}
+                  className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"
+                  data-testid="login"
+                />
+                <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
+              </div>
+              <div className="sign-in__field">
+                <input
+                  ref={passwordRef}
+                  className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"
+                  data-testid="password"
+                />
+                <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
+              </div>
             </div>
-            <div className="sign-in__field">
-              <input
-                ref={passwordRef}
-                className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"
-                data-testid="password"
-              />
-              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
+            <div className="sign-in__submit">
+              <button className="sign-in__btn" type="submit">Sign in</button>
             </div>
-          </div>
-          <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
-          </div>
-        </form>
+          </form>
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
