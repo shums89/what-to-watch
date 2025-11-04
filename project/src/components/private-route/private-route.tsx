@@ -3,18 +3,25 @@ import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import Spinner from '../spinner/spinner';
 
 type PrivateRouteProps = {
+  restrictedFor: AuthorizationStatus;
+  redirectTo: AppRoute;
   children: JSX.Element;
 }
 
-const PrivateRoute = ({ children }: PrivateRouteProps): JSX.Element => {
+const PrivateRoute = ({ children, restrictedFor, redirectTo }: PrivateRouteProps): JSX.Element => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return <Spinner />;
+  }
+
   return (
-    authorizationStatus === AuthorizationStatus.Auth
+    authorizationStatus !== restrictedFor
       ? children
-      : <Navigate to={AppRoute.Login} />
+      : <Navigate to={redirectTo} />
   );
 };
 

@@ -41,7 +41,9 @@ describe('Application Routing', () => {
 
   it('should render "AuthScreen" when user navigates to "/login"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
-    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore());
+    const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
+      USER_PROCESS: { authorizationStatus: AuthorizationStatus.NoAuth, user: null },
+    }));
     mockHistory.push(AppRoute.Login);
 
     render(withStoreComponent);
