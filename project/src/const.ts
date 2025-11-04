@@ -1,7 +1,13 @@
 export const FILM_COUNT_PER_STEP = 4;
 export const DEFAULT_GENRE = 'All genres';
+
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 400;
+
+export const INVALID_LOGIN_MESSAGE = 'Please enter a valid email address';
+
+export const INVALID_PASSWORD_MESSAGE = 'Password should contains at least one letter and digit';
+export const VALID_PASSWORD_REGEX = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
 
 export enum AppRoute {
   Root = '/',

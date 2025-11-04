@@ -1,12 +1,18 @@
 import { Helmet } from 'react-helmet-async';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import isEmail from 'validator/lib/isEmail';
+import { toast } from 'react-toastify';
 
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { INVALID_LOGIN_MESSAGE, INVALID_PASSWORD_MESSAGE, VALID_PASSWORD_REGEX } from '../../const';
 
 const AuthScreen = (): JSX.Element => {
+  const [isInvalidLogin, setIsInvalidLogin] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -15,12 +21,30 @@ const AuthScreen = (): JSX.Element => {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        login: loginRef.current.value,
-        password: passwordRef.current.value
-      }));
+    if (loginRef.current === null || passwordRef.current === null) {
+      return;
     }
+
+    if (!isEmail(loginRef.current.value)) {
+      setIsInvalidLogin(true);
+      toast.warn(INVALID_LOGIN_MESSAGE);
+      return;
+    }
+    setIsInvalidLogin(false);
+
+    if (!String(passwordRef.current.value).match(VALID_PASSWORD_REGEX)) {
+      setIsInvalidPassword(true);
+      toast.warn(INVALID_PASSWORD_MESSAGE);
+      return;
+    }
+    setIsInvalidPassword(false);
+
+
+    dispatch(loginAction({
+      login: loginRef.current.value,
+      password: passwordRef.current.value
+    }));
+
   };
 
   return (
@@ -38,8 +62,16 @@ const AuthScreen = (): JSX.Element => {
 
         <div className="sign-in user-page__content">
           <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+            {
+              isInvalidLogin || isInvalidPassword
+                ? (
+                  <div className="sign-in__message">
+                    <p>{isInvalidLogin && INVALID_LOGIN_MESSAGE || isInvalidPassword && INVALID_PASSWORD_MESSAGE}</p>
+                  </div>)
+                : ''
+            }
             <div className="sign-in__fields">
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${isInvalidLogin ? 'sign-in__field--error' : ''}`}>
                 <input
                   ref={loginRef}
                   className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email"
@@ -47,7 +79,7 @@ const AuthScreen = (): JSX.Element => {
                 />
                 <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
               </div>
-              <div className="sign-in__field">
+              <div className={`sign-in__field ${isInvalidPassword ? 'sign-in__field--error' : ''}`}>
                 <input
                   ref={passwordRef}
                   className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password"
@@ -60,10 +92,10 @@ const AuthScreen = (): JSX.Element => {
               <button className="sign-in__btn" type="submit">Sign in</button>
             </div>
           </form>
-        </div>
+        </div >
 
         <Footer />
-      </div>
+      </div >
     </>
   );
 };
