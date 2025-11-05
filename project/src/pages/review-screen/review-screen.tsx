@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 import type { CommentAuth } from '../../types/film';
 import HeaderUserBlock from '../../components/header-user-block/header-user-block';
@@ -9,19 +9,39 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, SubmitStatus } from '../../const';
 import Rating from '../../components/rating/rating';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { postCommentAction } from '../../store/api-actions';
-import { getCommentStatus, getFilm } from '../../store/film-data/selectors';
+import { fetchFilmAction, postCommentAction } from '../../store/api-actions';
+import { getCommentStatus, getFilm, getIsFilmLoading } from '../../store/film-data/selectors';
+import Spinner from '../../components/spinner/spinner';
 
 const ReviewScreen = (): JSX.Element => {
+  const params = useParams();
   const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm);
+  const isFilmDataLoading = useAppSelector(getIsFilmLoading);
   const submitStatus = useAppSelector(getCommentStatus);
   const [rating, setRating] = useState<CommentAuth['rating']>(0);
   const [comment, setComment] = useState<CommentAuth['comment']>('');
+  const [commentLength, setCommentLength] = useState(0);
   const isSubmiting = submitStatus === SubmitStatus.Pending;
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    const { id } = params;
+    if (id) {
+      const parsedId = Number(id);
+      dispatch(fetchFilmAction(parsedId));
+    }
+  }, [params, dispatch]);
 
   const ratingChangeHandle = ({ target }: ChangeEvent<HTMLInputElement>) => setRating(Number(target.value));
-  const commentChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => setComment(target.value);
+  const commentChangeHandle = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(target.value);
+    setCommentLength(target.value.length);
+  };
+
+  if (isFilmDataLoading) {
+    return <Spinner />;
+  }
 
   if (!film) {
     return <NotFoundScreen />;
@@ -82,9 +102,11 @@ const ReviewScreen = (): JSX.Element => {
                 className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
                 onChange={commentChangeHandle}
                 disabled={isSubmiting}
+                ref={textareaRef}
               >
               </textarea>
-              <div className="add-review__submit">
+              <div className="add-review__submit" style={{ justifyContent: 'space-between' }}>
+                <span style={{ color: '#866866', opacity: 0.5 }}>{commentLength}/{MAX_COMMENT_LENGTH}</span>
                 <button
                   className="add-review__btn"
                   type="submit"

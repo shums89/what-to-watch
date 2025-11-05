@@ -95,6 +95,7 @@ describe('Application Routing', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, makeFakeStore({
       FILM_DATA: { ...fakeFilmData, film },
+      USER_PROCESS: { authorizationStatus: AuthorizationStatus.Auth, user: null },
     }));
     mockHistory.push(`${AppRoute.Films}/${film.id}/review`);
 

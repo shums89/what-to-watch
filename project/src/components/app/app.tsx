@@ -36,7 +36,14 @@ const App = (): JSX.Element => (
           <Route index element={<NotFoundScreen />} />
           <Route path=":id">
             <Route index element={<FilmScreen />} />
-            <Route path="review" element={<ReviewScreen />} />
+            <Route
+              path="review"
+              element={
+                <PrivateRoute restrictedFor={AuthorizationStatus.NoAuth} redirectTo={AppRoute.Login}>
+                  <ReviewScreen />
+                </PrivateRoute>
+              }
+            />
           </Route>
         </Route>
         <Route path={`${AppRoute.Player}/:id`} element={<PlayerScreen />} />

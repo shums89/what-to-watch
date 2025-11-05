@@ -9,6 +9,7 @@ import browserHistory from '../../browser-history';
 import Spinner from '../../components/spinner/spinner';
 import { formatTime } from '../../utils';
 import { useElementListener } from '../../hooks/use-element-listener';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const PlayerScreen = (): JSX.Element => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -78,8 +79,12 @@ const PlayerScreen = (): JSX.Element => {
   }, [isPlaying, isLoaded, isFullscreen]);
 
 
-  if (isFilmDataLoading || !film) {
+  if (isFilmDataLoading) {
     return <Spinner />;
+  }
+
+  if (!film) {
+    return <NotFoundScreen />;
   }
 
   const { videoLink, previewImage, name } = film;

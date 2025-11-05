@@ -26,7 +26,6 @@ describe('Component: FilmTabs', () => {
   it('onClick should be called when user has chosen a tab', () => {
     render(preparedComponent);
 
-
     fireEvent.click(screen.getByTestId('button-tab-details'));
     expect(screen.getByTestId('item-tab-details')).toHaveClass('film-nav__item--active');
     expect(screen.getByText('Component FilmTabsDetails')).toBeInTheDocument();
