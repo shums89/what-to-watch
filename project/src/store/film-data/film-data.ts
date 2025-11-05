@@ -64,6 +64,12 @@ export const filmData = createSlice({
 
         state.films = state.films.map((film) => (film.id === updatedFilm.id ? updatedFilm : film));
 
+        if (updatedFilm.isFavorite) {
+          state.favoriteFilms = [...state.favoriteFilms, updatedFilm];
+        } else {
+          state.favoriteFilms = state.favoriteFilms.filter((item) => item.id !== updatedFilm.id);
+        }
+
         if (state.promo && state.promo.id === updatedFilm.id) {
           state.promo = updatedFilm;
         }

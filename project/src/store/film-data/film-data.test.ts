@@ -106,6 +106,7 @@ describe('Reducer: filmData', () => {
       films: films.map((item) => (item.id === favoriteFilm.id ? favoriteFilm : item)),
       promo: favoriteFilm,
       film: favoriteFilm,
+      favoriteFilms: [favoriteFilm],
     });
   });
 

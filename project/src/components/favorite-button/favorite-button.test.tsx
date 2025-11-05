@@ -2,10 +2,11 @@ import { render, screen } from '@testing-library/react';
 
 import { withHistory, withStore } from '../../test-utils/mock-component';
 import FavoriteButton from './favorite-button';
+import { makeFakeStore } from '../../test-utils/mocks';
 
 describe('Component: FavoriteButton', () => {
   it('should render correctly when film is on the list', () => {
-    const { withStoreComponent } = withStore(<FavoriteButton id={1} isFavorite />, {});
+    const { withStoreComponent } = withStore(<FavoriteButton id={1} isFavorite />, makeFakeStore());
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -16,7 +17,7 @@ describe('Component: FavoriteButton', () => {
   });
 
   it('should render correctly when film is not on the list', () => {
-    const { withStoreComponent } = withStore(<FavoriteButton id={1} isFavorite={false} />, {});
+    const { withStoreComponent } = withStore(<FavoriteButton id={1} isFavorite={false} />, makeFakeStore());
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
